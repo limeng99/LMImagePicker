@@ -1,0 +1,16 @@
+PODS:
+  - LMImagePicker (0.1.0)
+
+DEPENDENCIES:
+  - LMImagePicker (from `../`)
+
+EXTERNAL SOURCES:
+  LMImagePicker:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LMImagePicker: a1f139e274d1561f1eb6087e74f956a768218369
+
+PODFILE CHECKSUM: d6a700688987fe66b94f72947deaa6cb655952f0
+
+COCOAPODS: 1.6.0.beta.1
