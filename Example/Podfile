@@ -1,13 +1,8 @@
-use_frameworks!
 
 platform :ios, '9.0'
+inhibit_all_warnings!
 
-target 'LMImagePicker_Example' do
+target 'Example' do
   pod 'LMImagePicker', :path => '../'
 
-  target 'LMImagePicker_Tests' do
-    inherit! :search_paths
-
-    
-  end
 end

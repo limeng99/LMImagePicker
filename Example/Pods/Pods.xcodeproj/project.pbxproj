@@ -7,258 +7,265 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02D36552E0B5D5E3347AC5182012429C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
-		0D31ABE1663A78EFE7E5D3FEEBDF6549 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
-		12527F3736DAB3217BFC58C56E7F2178 /* Pods-LMImagePicker_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 20ACEC85FC2193DCD4BB48AE6F7F7602 /* Pods-LMImagePicker_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		126AB8901585240C33E4EC843B35F56B /* Pods-LMImagePicker_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B597190B59E352E4F579C50A9C55F1F3 /* Pods-LMImagePicker_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E876A49BEA3438F864AF9CBC85C8D9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
-		86D4BE3ECE8388C5926B09CDAA47114E /* Pods-LMImagePicker_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4CFC3C6148E782A0FE8DC854A8C39B /* Pods-LMImagePicker_Example-dummy.m */; };
-		8D334AA452D249F3B8DB7225F2064872 /* ReplaceMe.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1D9F32AFFFD869BD11D157BFA0E8EF /* ReplaceMe.m */; };
-		934729D7A85578DEA6F6498DC5E4CD39 /* LMImagePicker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6033553C72C5BAF8868434839C2F5C12 /* LMImagePicker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		99240B9CE19135D97F46EE0B5F9CC0E5 /* Pods-LMImagePicker_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C565EE1A508309F04329225668720D14 /* Pods-LMImagePicker_Tests-dummy.m */; };
-		E76A45EF2D011F3CAA0B0F5A1743767A /* LMImagePicker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E59432BF172A84134BF7FEF4E55BEDA /* LMImagePicker-dummy.m */; };
+		064538536060ADBB6322C0FC21D06507 /* LMPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DC0311EE15EB79B278760F6231EA36 /* LMPhotoPickerController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		113ECAF6411EE42C2CD6DD6B7571AC8F /* LMAssetCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C78DACAF9884633A81D4941A68B8DD9 /* LMAssetCell.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		263D0D965289FB9275841BBE79025229 /* Pods-LMImagePicker_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA4D496E9E464654313B3437AB64AD5 /* Pods-LMImagePicker_Example-dummy.m */; };
+		49C809CE8A8BBAA807CC03953016AB72 /* LMCommonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CE1437B28767A2F3CD6E578CFA7B0D /* LMCommonTools.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		51804AC5579F4D67163A2956DFE2185D /* UIImage+LMImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FA8E2FE93549E2AF72DE13030B0EB1 /* UIImage+LMImagePicker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		550D6BB1D6F6C74AF07AD52C7E0B5C6D /* UIView+LMLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 649E612B1426F76C291FB596E0E0C765 /* UIView+LMLayout.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		59A224134A63AE46535E9B46E90AD8AE /* LMPhotoPickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 966DA662E028EF72660DBAC79FBAB3EF /* LMPhotoPickerController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5E0464C068E62BC2398F22EC7B07C2E6 /* LMImagePicker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 58569168A7958ADE249EC24F017A921B /* LMImagePicker-dummy.m */; };
+		63CF9A35A187CB2C2211154842FCAC17 /* LMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB93BEA65FFDA372158D51622961743 /* LMProgressView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		7510F573C79151CE00BA490E9A656C42 /* LMPhotoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 52538186CD2322DD09AA976D1657D64D /* LMPhotoManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8EBEB0A39EB6DFEB482CAEB676EA5CAE /* UIView+LMLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 849D7569A93F57D3512AFCC6D7E353D0 /* UIView+LMLayout.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9B4BB3BFBC8E918D735A50EF02944231 /* UIButton+LMImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 872D10FF39F1001D263BAE19C2031D2D /* UIButton+LMImagePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A178460F99B0EDAFC957C4BC1B5CA677 /* LMCommonTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C634A2139E8B0BD1800F5BCA9B707EF /* LMCommonTools.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A1D76945ACFE676D8F9EAC1FC99D6024 /* UIButton+LMImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD71C8373BEB2B32B5472974FFE1E8C /* UIButton+LMImagePicker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A43F6709ABF44CD93FE1A758FE893C13 /* LMProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 97A6863A8E17C4B8C55FE987E8D29383 /* LMProgressView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B61DF9965E5FD3916DE3F804B41755AF /* LMImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = E5B0664889ACECF16678C954FA537E9D /* LMImagePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B6D36873F5B7EB397CF68748E4A634DC /* LMAssetModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B17A090DDB5724A8DD8EEF9CEB8A11A /* LMAssetModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BCEF26B5948399D2A3EA89AE8B48F995 /* LMPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4BBD6F7914D973361E9CCDDC8095FF /* LMPhotoManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		C7EF1A1BCC35ABFAC46B802EC1736AA7 /* NSBundle+LMImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CD6731EDFA364470E325391524F2B21 /* NSBundle+LMImagePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C9C7F9870044AEE589ED0E56AB01770A /* LMImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFDE3262EA125128FADAF4112BA787 /* LMImagePicker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		CA20D65C359D4ABB5708C96E239211E8 /* UIImage+LMImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = A714882509BF47561E439B886F15DF5D /* UIImage+LMImagePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CD36A957300466577A1B2165610F4456 /* LMAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7336CFCA0D45959009577E7ABC2DB2E6 /* LMAssetModel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		D0111634C222013F9D4BA17CC6AA1D3E /* LMAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92636DA33C1A9C50EB48CA6E2ACCA65 /* LMAlbumPickerController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		E0937CFF61F5E65771A9DC4995B5583E /* LMAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 561E44E645EEAFAAA424E0CAFBA98709 /* LMAssetCell.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		E135528D78BCE02DE78778FA273C53CE /* LMAlbumPickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A46855CED54E91AEC642065835A98A2 /* LMAlbumPickerController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EB01F39C77F2EE5FE49407DF7A2543FC /* NSBundle+LMImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BAF6D20EBEF3D6A492F9BA722B369C /* NSBundle+LMImagePicker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9A6468F587D20F45848B4B861D427B74 /* PBXContainerItemProxy */ = {
+		DA4238976840389D2EFF77EE03A0E801 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 457748D173CFAEDE11F1F93A7B8020D1;
+			remoteGlobalIDString = 2D8172C772E07C6E9C8D5C5AAC4283DA;
 			remoteInfo = LMImagePicker;
-		};
-		EA62E090C19F73F0914BD45D66C08354 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7F954EABAA29AF79F0A448502BE32CEC;
-			remoteInfo = "Pods-LMImagePicker_Example";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0D62B8EF42A317C671D72368C8F7AE58 /* LMImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LMImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		16AB82D9F3E29222A2B67EB02AE98C03 /* Pods-LMImagePicker_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LMImagePicker_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		1F19FEEEF0690AACDEAA00018B571816 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		20ACEC85FC2193DCD4BB48AE6F7F7602 /* Pods-LMImagePicker_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LMImagePicker_Example-umbrella.h"; sourceTree = "<group>"; };
-		215D747BC0B55CF047C3397B4CC179FA /* Pods-LMImagePicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LMImagePicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		38E74209A6ABE793914F873CD28FB700 /* Pods-LMImagePicker_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LMImagePicker_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		43136D2F5E228F0CD621928202376067 /* Pods-LMImagePicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LMImagePicker_Example.release.xcconfig"; sourceTree = "<group>"; };
-		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6033553C72C5BAF8868434839C2F5C12 /* LMImagePicker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LMImagePicker-umbrella.h"; sourceTree = "<group>"; };
-		663A3A31707704B98AA7A8192C950971 /* LMImagePicker.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LMImagePicker.xcconfig; sourceTree = "<group>"; };
-		670BC5B2BA9045B9A847B670563A4AFA /* Pods-LMImagePicker_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LMImagePicker_Tests.modulemap"; sourceTree = "<group>"; };
-		7AEBFE29D07167D807810F73E98D04EF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		7D4CFC3C6148E782A0FE8DC854A8C39B /* Pods-LMImagePicker_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LMImagePicker_Example-dummy.m"; sourceTree = "<group>"; };
-		7E31EB6161BEF4A558E76870DB9E542C /* Pods-LMImagePicker_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LMImagePicker_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		82BE395F41D2ED9C7CE90EA9CC1ABEBD /* LMImagePicker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LMImagePicker.modulemap; sourceTree = "<group>"; };
-		8E59432BF172A84134BF7FEF4E55BEDA /* LMImagePicker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LMImagePicker-dummy.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		95F0A1044CCE8745DB0FA061DFCBFE1C /* Pods-LMImagePicker_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LMImagePicker_Example-Info.plist"; sourceTree = "<group>"; };
-		9698D11CF39B78ED06B6E85BA425FD1C /* Pods-LMImagePicker_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LMImagePicker_Example.modulemap"; sourceTree = "<group>"; };
-		98CFB697DD93BF79B363D25187B3A9BB /* Pods-LMImagePicker_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LMImagePicker_Example-frameworks.sh"; sourceTree = "<group>"; };
-		A269D9EBD037C8EF50E33E91C7FA38AD /* Pods-LMImagePicker_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LMImagePicker_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		A443D421A86AF7749670222A8BE3BE93 /* Pods_LMImagePicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LMImagePicker_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A52578223293AD3FE8C7AA4F9BDE6FEE /* LMImagePicker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LMImagePicker-prefix.pch"; sourceTree = "<group>"; };
-		B597190B59E352E4F579C50A9C55F1F3 /* Pods-LMImagePicker_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LMImagePicker_Tests-umbrella.h"; sourceTree = "<group>"; };
-		BA1D9F32AFFFD869BD11D157BFA0E8EF /* ReplaceMe.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ReplaceMe.m; path = LMImagePicker/Classes/ReplaceMe.m; sourceTree = "<group>"; };
-		C4AA612D06B5EEA3048DF076574ED9A4 /* Pods-LMImagePicker_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LMImagePicker_Tests-Info.plist"; sourceTree = "<group>"; };
-		C565EE1A508309F04329225668720D14 /* Pods-LMImagePicker_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LMImagePicker_Tests-dummy.m"; sourceTree = "<group>"; };
-		C7CB84E83457633FCEE55C6EAC81F265 /* Pods-LMImagePicker_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LMImagePicker_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E02A81CC8944F1E7CF85DFD248BA7B19 /* LMImagePicker.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = LMImagePicker.podspec; sourceTree = "<group>"; };
-		E1A64CF31C465A7704D8967591EAC37F /* LMImagePicker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LMImagePicker-Info.plist"; sourceTree = "<group>"; };
-		E63496A845D9C824047F44AF618CFFA0 /* Pods-LMImagePicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LMImagePicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		F1C4EB7731DC9246B7957A4CCE9FB3EA /* Pods_LMImagePicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LMImagePicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		059BF5D925DA34F15CACDB63C6DD400B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		09FA8E2FE93549E2AF72DE13030B0EB1 /* UIImage+LMImagePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+LMImagePicker.m"; path = "LMImagePicker/Classes/UIImage+LMImagePicker.m"; sourceTree = "<group>"; };
+		144DEAD1A4286D593CCCC45722751F90 /* LMImagePicker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LMImagePicker-prefix.pch"; sourceTree = "<group>"; };
+		1C634A2139E8B0BD1800F5BCA9B707EF /* LMCommonTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMCommonTools.h; path = LMImagePicker/Classes/LMCommonTools.h; sourceTree = "<group>"; };
+		1C78DACAF9884633A81D4941A68B8DD9 /* LMAssetCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMAssetCell.h; path = LMImagePicker/Classes/LMAssetCell.h; sourceTree = "<group>"; };
+		260D9F34ABAB785D6D60DF250635C85A /* Pods-LMImagePicker_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LMImagePicker_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		3846CA5B2636692E740C17DEDD019208 /* libLMImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libLMImagePicker.a; path = libLMImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		39BB12070CEB2FAF5A072E109252C1BD /* Pods-LMImagePicker_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LMImagePicker_Example-resources.sh"; sourceTree = "<group>"; };
+		3CD71C8373BEB2B32B5472974FFE1E8C /* UIButton+LMImagePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+LMImagePicker.m"; path = "LMImagePicker/Classes/UIButton+LMImagePicker.m"; sourceTree = "<group>"; };
+		3F0EA93A67735F4C66DC3A745545C6FD /* Pods-LMImagePicker_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LMImagePicker_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		48BBF341983F7DF5306ACF456D59832E /* LMImagePicker.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LMImagePicker.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4B717B1B4EDB2FF6669F47DFA2A2041A /* libPods-LMImagePicker_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-LMImagePicker_Example.a"; path = "libPods-LMImagePicker_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E5F32E97149F96EFD27F7D2F0690F16 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		52538186CD2322DD09AA976D1657D64D /* LMPhotoManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMPhotoManager.h; path = LMImagePicker/Classes/LMPhotoManager.h; sourceTree = "<group>"; };
+		561E44E645EEAFAAA424E0CAFBA98709 /* LMAssetCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMAssetCell.m; path = LMImagePicker/Classes/LMAssetCell.m; sourceTree = "<group>"; };
+		58569168A7958ADE249EC24F017A921B /* LMImagePicker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LMImagePicker-dummy.m"; sourceTree = "<group>"; };
+		59BFDE3262EA125128FADAF4112BA787 /* LMImagePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMImagePicker.m; path = LMImagePicker/Classes/LMImagePicker.m; sourceTree = "<group>"; };
+		649E612B1426F76C291FB596E0E0C765 /* UIView+LMLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+LMLayout.m"; path = "LMImagePicker/Classes/UIView+LMLayout.m"; sourceTree = "<group>"; };
+		7062F1FCFBDDD0A61543748CE44CFD4F /* LMImagePicker.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LMImagePicker.xcconfig; sourceTree = "<group>"; };
+		7336CFCA0D45959009577E7ABC2DB2E6 /* LMAssetModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMAssetModel.m; path = LMImagePicker/Classes/LMAssetModel.m; sourceTree = "<group>"; };
+		7FB93BEA65FFDA372158D51622961743 /* LMProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMProgressView.m; path = LMImagePicker/Classes/LMProgressView.m; sourceTree = "<group>"; };
+		849D7569A93F57D3512AFCC6D7E353D0 /* UIView+LMLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+LMLayout.h"; path = "LMImagePicker/Classes/UIView+LMLayout.h"; sourceTree = "<group>"; };
+		872D10FF39F1001D263BAE19C2031D2D /* UIButton+LMImagePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+LMImagePicker.h"; path = "LMImagePicker/Classes/UIButton+LMImagePicker.h"; sourceTree = "<group>"; };
+		89772C26DD637E7F38FCCD9FAAF49206 /* LMImagePicker.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = LMImagePicker.bundle; path = LMImagePicker/Classes/Resources/LMImagePicker.bundle; sourceTree = "<group>"; };
+		8A46855CED54E91AEC642065835A98A2 /* LMAlbumPickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMAlbumPickerController.h; path = LMImagePicker/Classes/LMAlbumPickerController.h; sourceTree = "<group>"; };
+		8B17A090DDB5724A8DD8EEF9CEB8A11A /* LMAssetModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMAssetModel.h; path = LMImagePicker/Classes/LMAssetModel.h; sourceTree = "<group>"; };
+		95BAF6D20EBEF3D6A492F9BA722B369C /* NSBundle+LMImagePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+LMImagePicker.m"; path = "LMImagePicker/Classes/NSBundle+LMImagePicker.m"; sourceTree = "<group>"; };
+		966DA662E028EF72660DBAC79FBAB3EF /* LMPhotoPickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMPhotoPickerController.h; path = LMImagePicker/Classes/LMPhotoPickerController.h; sourceTree = "<group>"; };
+		97A6863A8E17C4B8C55FE987E8D29383 /* LMProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMProgressView.h; path = LMImagePicker/Classes/LMProgressView.h; sourceTree = "<group>"; };
+		9CD6731EDFA364470E325391524F2B21 /* NSBundle+LMImagePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+LMImagePicker.h"; path = "LMImagePicker/Classes/NSBundle+LMImagePicker.h"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A4CE1437B28767A2F3CD6E578CFA7B0D /* LMCommonTools.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMCommonTools.m; path = LMImagePicker/Classes/LMCommonTools.m; sourceTree = "<group>"; };
+		A714882509BF47561E439B886F15DF5D /* UIImage+LMImagePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+LMImagePicker.h"; path = "LMImagePicker/Classes/UIImage+LMImagePicker.h"; sourceTree = "<group>"; };
+		B5DC0311EE15EB79B278760F6231EA36 /* LMPhotoPickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMPhotoPickerController.m; path = LMImagePicker/Classes/LMPhotoPickerController.m; sourceTree = "<group>"; };
+		B92636DA33C1A9C50EB48CA6E2ACCA65 /* LMAlbumPickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMAlbumPickerController.m; path = LMImagePicker/Classes/LMAlbumPickerController.m; sourceTree = "<group>"; };
+		BE4BBD6F7914D973361E9CCDDC8095FF /* LMPhotoManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMPhotoManager.m; path = LMImagePicker/Classes/LMPhotoManager.m; sourceTree = "<group>"; };
+		D92C712EAFAEF35D40BA9E5ABCED7164 /* Pods-LMImagePicker_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LMImagePicker_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		E5B0664889ACECF16678C954FA537E9D /* LMImagePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMImagePicker.h; path = LMImagePicker/Classes/LMImagePicker.h; sourceTree = "<group>"; };
+		EEA4D496E9E464654313B3437AB64AD5 /* Pods-LMImagePicker_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LMImagePicker_Example-dummy.m"; sourceTree = "<group>"; };
+		EEAF5549178C8FAD880F74FDD59D9677 /* Pods-LMImagePicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LMImagePicker_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		22A7FCAA1FC6CBA78613FBC59E1704EA /* Frameworks */ = {
+		8743E46BB17692841A7EDF02A76181F0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E876A49BEA3438F864AF9CBC85C8D9B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4033F24B2CCF5811AA8F197AE4400834 /* Frameworks */ = {
+		92119ACCF33A9C7B253D02D6DD5C61D0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D31ABE1663A78EFE7E5D3FEEBDF6549 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E84C45C15D1666B069713629E91A7DA8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				02D36552E0B5D5E3347AC5182012429C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		35AE95C496C70D03DF50B304AAC2DA84 /* Pods-LMImagePicker_Tests */ = {
+		08473314F5DB769CE7424536B0601AB5 /* Pods-LMImagePicker_Example */ = {
 			isa = PBXGroup;
 			children = (
-				670BC5B2BA9045B9A847B670563A4AFA /* Pods-LMImagePicker_Tests.modulemap */,
-				38E74209A6ABE793914F873CD28FB700 /* Pods-LMImagePicker_Tests-acknowledgements.markdown */,
-				16AB82D9F3E29222A2B67EB02AE98C03 /* Pods-LMImagePicker_Tests-acknowledgements.plist */,
-				C565EE1A508309F04329225668720D14 /* Pods-LMImagePicker_Tests-dummy.m */,
-				C4AA612D06B5EEA3048DF076574ED9A4 /* Pods-LMImagePicker_Tests-Info.plist */,
-				B597190B59E352E4F579C50A9C55F1F3 /* Pods-LMImagePicker_Tests-umbrella.h */,
-				E63496A845D9C824047F44AF618CFFA0 /* Pods-LMImagePicker_Tests.debug.xcconfig */,
-				215D747BC0B55CF047C3397B4CC179FA /* Pods-LMImagePicker_Tests.release.xcconfig */,
-			);
-			name = "Pods-LMImagePicker_Tests";
-			path = "Target Support Files/Pods-LMImagePicker_Tests";
-			sourceTree = "<group>";
-		};
-		5E0D919E635D23B70123790B8308F8EF /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				7FDCFCF69957991E30FC572CC4EC820F /* Development Pods */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				7F06428E2FA294CC8E1DFCD93B6CB0AC /* Products */,
-				D3658C862DBDD53A13B232723126A459 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		7F06428E2FA294CC8E1DFCD93B6CB0AC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0D62B8EF42A317C671D72368C8F7AE58 /* LMImagePicker.framework */,
-				F1C4EB7731DC9246B7957A4CCE9FB3EA /* Pods_LMImagePicker_Example.framework */,
-				A443D421A86AF7749670222A8BE3BE93 /* Pods_LMImagePicker_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7FDCFCF69957991E30FC572CC4EC820F /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D87281A508BFF4772B2F1904647B6725 /* LMImagePicker */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5E0D919E635D23B70123790B8308F8EF /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CE44E586C9C920F5A28D5BFEC6321382 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				82BE395F41D2ED9C7CE90EA9CC1ABEBD /* LMImagePicker.modulemap */,
-				663A3A31707704B98AA7A8192C950971 /* LMImagePicker.xcconfig */,
-				8E59432BF172A84134BF7FEF4E55BEDA /* LMImagePicker-dummy.m */,
-				E1A64CF31C465A7704D8967591EAC37F /* LMImagePicker-Info.plist */,
-				A52578223293AD3FE8C7AA4F9BDE6FEE /* LMImagePicker-prefix.pch */,
-				6033553C72C5BAF8868434839C2F5C12 /* LMImagePicker-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/LMImagePicker";
-			sourceTree = "<group>";
-		};
-		D3658C862DBDD53A13B232723126A459 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				D60D65701DC72C4600527910D931544C /* Pods-LMImagePicker_Example */,
-				35AE95C496C70D03DF50B304AAC2DA84 /* Pods-LMImagePicker_Tests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		D60D65701DC72C4600527910D931544C /* Pods-LMImagePicker_Example */ = {
-			isa = PBXGroup;
-			children = (
-				9698D11CF39B78ED06B6E85BA425FD1C /* Pods-LMImagePicker_Example.modulemap */,
-				C7CB84E83457633FCEE55C6EAC81F265 /* Pods-LMImagePicker_Example-acknowledgements.markdown */,
-				A269D9EBD037C8EF50E33E91C7FA38AD /* Pods-LMImagePicker_Example-acknowledgements.plist */,
-				7D4CFC3C6148E782A0FE8DC854A8C39B /* Pods-LMImagePicker_Example-dummy.m */,
-				98CFB697DD93BF79B363D25187B3A9BB /* Pods-LMImagePicker_Example-frameworks.sh */,
-				95F0A1044CCE8745DB0FA061DFCBFE1C /* Pods-LMImagePicker_Example-Info.plist */,
-				20ACEC85FC2193DCD4BB48AE6F7F7602 /* Pods-LMImagePicker_Example-umbrella.h */,
-				7E31EB6161BEF4A558E76870DB9E542C /* Pods-LMImagePicker_Example.debug.xcconfig */,
-				43136D2F5E228F0CD621928202376067 /* Pods-LMImagePicker_Example.release.xcconfig */,
+				3F0EA93A67735F4C66DC3A745545C6FD /* Pods-LMImagePicker_Example-acknowledgements.markdown */,
+				260D9F34ABAB785D6D60DF250635C85A /* Pods-LMImagePicker_Example-acknowledgements.plist */,
+				EEA4D496E9E464654313B3437AB64AD5 /* Pods-LMImagePicker_Example-dummy.m */,
+				39BB12070CEB2FAF5A072E109252C1BD /* Pods-LMImagePicker_Example-resources.sh */,
+				D92C712EAFAEF35D40BA9E5ABCED7164 /* Pods-LMImagePicker_Example.debug.xcconfig */,
+				EEAF5549178C8FAD880F74FDD59D9677 /* Pods-LMImagePicker_Example.release.xcconfig */,
 			);
 			name = "Pods-LMImagePicker_Example";
 			path = "Target Support Files/Pods-LMImagePicker_Example";
 			sourceTree = "<group>";
 		};
-		D87281A508BFF4772B2F1904647B6725 /* LMImagePicker */ = {
+		08612DF89BCAC65C499F5B6138DECDEE /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BA1D9F32AFFFD869BD11D157BFA0E8EF /* ReplaceMe.m */,
-				EF10A3F951E9F66B0CADA56C9CA9E35B /* Pod */,
-				CE44E586C9C920F5A28D5BFEC6321382 /* Support Files */,
+				D7E3D01D29DEE5BAA96A06275D281A51 /* LMImagePicker */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		43259FEC6A7D619A87509EB241711C3D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				08473314F5DB769CE7424536B0601AB5 /* Pods-LMImagePicker_Example */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		7D2572300946AACF5A1F2115C5A63672 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7062F1FCFBDDD0A61543748CE44CFD4F /* LMImagePicker.xcconfig */,
+				58569168A7958ADE249EC24F017A921B /* LMImagePicker-dummy.m */,
+				144DEAD1A4286D593CCCC45722751F90 /* LMImagePicker-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/LMImagePicker";
+			sourceTree = "<group>";
+		};
+		83563D38858AA4A0E88673C5E39AA1BB /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				059BF5D925DA34F15CACDB63C6DD400B /* LICENSE */,
+				48BBF341983F7DF5306ACF456D59832E /* LMImagePicker.podspec */,
+				4E5F32E97149F96EFD27F7D2F0690F16 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		866632F4C78FBCCF224BB92479F5EC53 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				89772C26DD637E7F38FCCD9FAAF49206 /* LMImagePicker.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BE0121C965B519FFE1508336A0D6E8B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3846CA5B2636692E740C17DEDD019208 /* libLMImagePicker.a */,
+				4B717B1B4EDB2FF6669F47DFA2A2041A /* libPods-LMImagePicker_Example.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				08612DF89BCAC65C499F5B6138DECDEE /* Development Pods */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				BE0121C965B519FFE1508336A0D6E8B3 /* Products */,
+				43259FEC6A7D619A87509EB241711C3D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D7E3D01D29DEE5BAA96A06275D281A51 /* LMImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				8A46855CED54E91AEC642065835A98A2 /* LMAlbumPickerController.h */,
+				B92636DA33C1A9C50EB48CA6E2ACCA65 /* LMAlbumPickerController.m */,
+				1C78DACAF9884633A81D4941A68B8DD9 /* LMAssetCell.h */,
+				561E44E645EEAFAAA424E0CAFBA98709 /* LMAssetCell.m */,
+				8B17A090DDB5724A8DD8EEF9CEB8A11A /* LMAssetModel.h */,
+				7336CFCA0D45959009577E7ABC2DB2E6 /* LMAssetModel.m */,
+				1C634A2139E8B0BD1800F5BCA9B707EF /* LMCommonTools.h */,
+				A4CE1437B28767A2F3CD6E578CFA7B0D /* LMCommonTools.m */,
+				E5B0664889ACECF16678C954FA537E9D /* LMImagePicker.h */,
+				59BFDE3262EA125128FADAF4112BA787 /* LMImagePicker.m */,
+				52538186CD2322DD09AA976D1657D64D /* LMPhotoManager.h */,
+				BE4BBD6F7914D973361E9CCDDC8095FF /* LMPhotoManager.m */,
+				966DA662E028EF72660DBAC79FBAB3EF /* LMPhotoPickerController.h */,
+				B5DC0311EE15EB79B278760F6231EA36 /* LMPhotoPickerController.m */,
+				97A6863A8E17C4B8C55FE987E8D29383 /* LMProgressView.h */,
+				7FB93BEA65FFDA372158D51622961743 /* LMProgressView.m */,
+				9CD6731EDFA364470E325391524F2B21 /* NSBundle+LMImagePicker.h */,
+				95BAF6D20EBEF3D6A492F9BA722B369C /* NSBundle+LMImagePicker.m */,
+				872D10FF39F1001D263BAE19C2031D2D /* UIButton+LMImagePicker.h */,
+				3CD71C8373BEB2B32B5472974FFE1E8C /* UIButton+LMImagePicker.m */,
+				A714882509BF47561E439B886F15DF5D /* UIImage+LMImagePicker.h */,
+				09FA8E2FE93549E2AF72DE13030B0EB1 /* UIImage+LMImagePicker.m */,
+				849D7569A93F57D3512AFCC6D7E353D0 /* UIView+LMLayout.h */,
+				649E612B1426F76C291FB596E0E0C765 /* UIView+LMLayout.m */,
+				83563D38858AA4A0E88673C5E39AA1BB /* Pod */,
+				866632F4C78FBCCF224BB92479F5EC53 /* Resources */,
+				7D2572300946AACF5A1F2115C5A63672 /* Support Files */,
 			);
 			name = LMImagePicker;
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		EF10A3F951E9F66B0CADA56C9CA9E35B /* Pod */ = {
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1F19FEEEF0690AACDEAA00018B571816 /* LICENSE */,
-				E02A81CC8944F1E7CF85DFD248BA7B19 /* LMImagePicker.podspec */,
-				7AEBFE29D07167D807810F73E98D04EF /* README.md */,
 			);
-			name = Pod;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2A4972E51BEE6435096C43B55D2DB6F9 /* Headers */ = {
+		1022C29783BA7807D8A5776B2F38E67A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				934729D7A85578DEA6F6498DC5E4CD39 /* LMImagePicker-umbrella.h in Headers */,
+				E135528D78BCE02DE78778FA273C53CE /* LMAlbumPickerController.h in Headers */,
+				113ECAF6411EE42C2CD6DD6B7571AC8F /* LMAssetCell.h in Headers */,
+				B6D36873F5B7EB397CF68748E4A634DC /* LMAssetModel.h in Headers */,
+				A178460F99B0EDAFC957C4BC1B5CA677 /* LMCommonTools.h in Headers */,
+				B61DF9965E5FD3916DE3F804B41755AF /* LMImagePicker.h in Headers */,
+				7510F573C79151CE00BA490E9A656C42 /* LMPhotoManager.h in Headers */,
+				59A224134A63AE46535E9B46E90AD8AE /* LMPhotoPickerController.h in Headers */,
+				A43F6709ABF44CD93FE1A758FE893C13 /* LMProgressView.h in Headers */,
+				C7EF1A1BCC35ABFAC46B802EC1736AA7 /* NSBundle+LMImagePicker.h in Headers */,
+				9B4BB3BFBC8E918D735A50EF02944231 /* UIButton+LMImagePicker.h in Headers */,
+				CA20D65C359D4ABB5708C96E239211E8 /* UIImage+LMImagePicker.h in Headers */,
+				8EBEB0A39EB6DFEB482CAEB676EA5CAE /* UIView+LMLayout.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E660E06525A423DD41B94F85BBA3AC23 /* Headers */ = {
+		4B31B87A0AF601EECDA9ED291E0FB92B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12527F3736DAB3217BFC58C56E7F2178 /* Pods-LMImagePicker_Example-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EC88EC618C1014714D8F7C8272F2D15E /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				126AB8901585240C33E4EC843B35F56B /* Pods-LMImagePicker_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		457748D173CFAEDE11F1F93A7B8020D1 /* LMImagePicker */ = {
+		2D8172C772E07C6E9C8D5C5AAC4283DA /* LMImagePicker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 416480B2EA869B1B3E8444837C8CDD0F /* Build configuration list for PBXNativeTarget "LMImagePicker" */;
+			buildConfigurationList = A7B1BBF864FAD8FA6C86DE808BE1F445 /* Build configuration list for PBXNativeTarget "LMImagePicker" */;
 			buildPhases = (
-				2A4972E51BEE6435096C43B55D2DB6F9 /* Headers */,
-				9EB823773E64D75629164F79ECF25E87 /* Sources */,
-				E84C45C15D1666B069713629E91A7DA8 /* Frameworks */,
-				F83BB826E012A2C0D91AC0D771570F88 /* Resources */,
+				1022C29783BA7807D8A5776B2F38E67A /* Headers */,
+				AB2C3FAC48354DA0620E94A5A7B784C1 /* Sources */,
+				8743E46BB17692841A7EDF02A76181F0 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -266,211 +273,145 @@
 			);
 			name = LMImagePicker;
 			productName = LMImagePicker;
-			productReference = 0D62B8EF42A317C671D72368C8F7AE58 /* LMImagePicker.framework */;
-			productType = "com.apple.product-type.framework";
+			productReference = 3846CA5B2636692E740C17DEDD019208 /* libLMImagePicker.a */;
+			productType = "com.apple.product-type.library.static";
 		};
-		72A9823512A1F48EB7D7BC3094828DE5 /* Pods-LMImagePicker_Tests */ = {
+		9BB8FC56AC8207D10AE98980570BE721 /* Pods-LMImagePicker_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C82B2C0990BE06900823C6E2A4C4A1A5 /* Build configuration list for PBXNativeTarget "Pods-LMImagePicker_Tests" */;
+			buildConfigurationList = 17CBB4DFBE215377643CEEFA908FB732 /* Build configuration list for PBXNativeTarget "Pods-LMImagePicker_Example" */;
 			buildPhases = (
-				EC88EC618C1014714D8F7C8272F2D15E /* Headers */,
-				34EFD4F9B406F2415F5ABE531EC6F92A /* Sources */,
-				4033F24B2CCF5811AA8F197AE4400834 /* Frameworks */,
-				E9F030A1494E41C0B65070BDD3753211 /* Resources */,
+				4B31B87A0AF601EECDA9ED291E0FB92B /* Headers */,
+				95DDE027CF7539DF1A6CD3393764FBE4 /* Sources */,
+				92119ACCF33A9C7B253D02D6DD5C61D0 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2B1848AED800E4D0F6601E87387BCBDE /* PBXTargetDependency */,
-			);
-			name = "Pods-LMImagePicker_Tests";
-			productName = "Pods-LMImagePicker_Tests";
-			productReference = A443D421A86AF7749670222A8BE3BE93 /* Pods_LMImagePicker_Tests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7F954EABAA29AF79F0A448502BE32CEC /* Pods-LMImagePicker_Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A96A3417909FA3F117CAA9F0AF0D6312 /* Build configuration list for PBXNativeTarget "Pods-LMImagePicker_Example" */;
-			buildPhases = (
-				E660E06525A423DD41B94F85BBA3AC23 /* Headers */,
-				2AB33A35F79AB24A9D1DD60C05291DD9 /* Sources */,
-				22A7FCAA1FC6CBA78613FBC59E1704EA /* Frameworks */,
-				FD957BAFB9BC70018EAB2F6EA0AFC94C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D126D70895D985E7F838CB1FD1D1E168 /* PBXTargetDependency */,
+				D46845854B5D0F61EEADA1B1A30B99FE /* PBXTargetDependency */,
 			);
 			name = "Pods-LMImagePicker_Example";
 			productName = "Pods-LMImagePicker_Example";
-			productReference = F1C4EB7731DC9246B7957A4CCE9FB3EA /* Pods_LMImagePicker_Example.framework */;
-			productType = "com.apple.product-type.framework";
+			productReference = 4B717B1B4EDB2FF6669F47DFA2A2041A /* libPods-LMImagePicker_Example.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 7F06428E2FA294CC8E1DFCD93B6CB0AC /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = BE0121C965B519FFE1508336A0D6E8B3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				457748D173CFAEDE11F1F93A7B8020D1 /* LMImagePicker */,
-				7F954EABAA29AF79F0A448502BE32CEC /* Pods-LMImagePicker_Example */,
-				72A9823512A1F48EB7D7BC3094828DE5 /* Pods-LMImagePicker_Tests */,
+				2D8172C772E07C6E9C8D5C5AAC4283DA /* LMImagePicker */,
+				9BB8FC56AC8207D10AE98980570BE721 /* Pods-LMImagePicker_Example */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		E9F030A1494E41C0B65070BDD3753211 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F83BB826E012A2C0D91AC0D771570F88 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FD957BAFB9BC70018EAB2F6EA0AFC94C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		2AB33A35F79AB24A9D1DD60C05291DD9 /* Sources */ = {
+		95DDE027CF7539DF1A6CD3393764FBE4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86D4BE3ECE8388C5926B09CDAA47114E /* Pods-LMImagePicker_Example-dummy.m in Sources */,
+				263D0D965289FB9275841BBE79025229 /* Pods-LMImagePicker_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		34EFD4F9B406F2415F5ABE531EC6F92A /* Sources */ = {
+		AB2C3FAC48354DA0620E94A5A7B784C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99240B9CE19135D97F46EE0B5F9CC0E5 /* Pods-LMImagePicker_Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9EB823773E64D75629164F79ECF25E87 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E76A45EF2D011F3CAA0B0F5A1743767A /* LMImagePicker-dummy.m in Sources */,
-				8D334AA452D249F3B8DB7225F2064872 /* ReplaceMe.m in Sources */,
+				D0111634C222013F9D4BA17CC6AA1D3E /* LMAlbumPickerController.m in Sources */,
+				E0937CFF61F5E65771A9DC4995B5583E /* LMAssetCell.m in Sources */,
+				CD36A957300466577A1B2165610F4456 /* LMAssetModel.m in Sources */,
+				49C809CE8A8BBAA807CC03953016AB72 /* LMCommonTools.m in Sources */,
+				5E0464C068E62BC2398F22EC7B07C2E6 /* LMImagePicker-dummy.m in Sources */,
+				C9C7F9870044AEE589ED0E56AB01770A /* LMImagePicker.m in Sources */,
+				BCEF26B5948399D2A3EA89AE8B48F995 /* LMPhotoManager.m in Sources */,
+				064538536060ADBB6322C0FC21D06507 /* LMPhotoPickerController.m in Sources */,
+				63CF9A35A187CB2C2211154842FCAC17 /* LMProgressView.m in Sources */,
+				EB01F39C77F2EE5FE49407DF7A2543FC /* NSBundle+LMImagePicker.m in Sources */,
+				A1D76945ACFE676D8F9EAC1FC99D6024 /* UIButton+LMImagePicker.m in Sources */,
+				51804AC5579F4D67163A2956DFE2185D /* UIImage+LMImagePicker.m in Sources */,
+				550D6BB1D6F6C74AF07AD52C7E0B5C6D /* UIView+LMLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2B1848AED800E4D0F6601E87387BCBDE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-LMImagePicker_Example";
-			target = 7F954EABAA29AF79F0A448502BE32CEC /* Pods-LMImagePicker_Example */;
-			targetProxy = EA62E090C19F73F0914BD45D66C08354 /* PBXContainerItemProxy */;
-		};
-		D126D70895D985E7F838CB1FD1D1E168 /* PBXTargetDependency */ = {
+		D46845854B5D0F61EEADA1B1A30B99FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LMImagePicker;
-			target = 457748D173CFAEDE11F1F93A7B8020D1 /* LMImagePicker */;
-			targetProxy = 9A6468F587D20F45848B4B861D427B74 /* PBXContainerItemProxy */;
+			target = 2D8172C772E07C6E9C8D5C5AAC4283DA /* LMImagePicker */;
+			targetProxy = DA4238976840389D2EFF77EE03A0E801 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2FF88D38B55DC6A6A562D4BA75912C07 /* Debug */ = {
+		158790A203498CBCAC46EE75FDA335E7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E31EB6161BEF4A558E76870DB9E542C /* Pods-LMImagePicker_Example.debug.xcconfig */;
+			baseConfigurationReference = 7062F1FCFBDDD0A61543748CE44CFD4F /* LMImagePicker.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-LMImagePicker_Example/Pods-LMImagePicker_Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_PREFIX_HEADER = "Target Support Files/LMImagePicker/LMImagePicker-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-LMImagePicker_Example/Pods-LMImagePicker_Example.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = LMImagePicker;
+				PRODUCT_NAME = LMImagePicker;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				VALIDATE_PRODUCT = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
-		8DEE643ACC2C8C4421363B586DB52DE3 /* Debug */ = {
+		27699BF8BAF46F0A38E45D1249B69F1F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E63496A845D9C824047F44AF618CFFA0 /* Pods-LMImagePicker_Tests.debug.xcconfig */;
+			baseConfigurationReference = 7062F1FCFBDDD0A61543748CE44CFD4F /* LMImagePicker.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-LMImagePicker_Tests/Pods-LMImagePicker_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_PREFIX_HEADER = "Target Support Files/LMImagePicker/LMImagePicker-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-LMImagePicker_Tests/Pods-LMImagePicker_Tests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = LMImagePicker;
+				PRODUCT_NAME = LMImagePicker;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		96434B6C8FF320C976A10DAD7174A4BB /* Release */ = {
+		8F17DC3A99F99FBAD606CE6963886315 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -502,8 +443,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -520,147 +459,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		A11F74AA5077042D656213FFDFF29FC0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 215D747BC0B55CF047C3397B4CC179FA /* Pods-LMImagePicker_Tests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-LMImagePicker_Tests/Pods-LMImagePicker_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-LMImagePicker_Tests/Pods-LMImagePicker_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		AE94CD4A8CA9BE3CCBCCA166AD47814F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43136D2F5E228F0CD621928202376067 /* Pods-LMImagePicker_Example.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-LMImagePicker_Example/Pods-LMImagePicker_Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-LMImagePicker_Example/Pods-LMImagePicker_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C7CAD7BD32AEB29F28CE5F7629F74981 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 663A3A31707704B98AA7A8192C950971 /* LMImagePicker.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LMImagePicker/LMImagePicker-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LMImagePicker/LMImagePicker-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LMImagePicker/LMImagePicker.modulemap";
-				PRODUCT_MODULE_NAME = LMImagePicker;
-				PRODUCT_NAME = LMImagePicker;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C9617375E9E8271437CF15996FC13DF0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 663A3A31707704B98AA7A8192C950971 /* LMImagePicker.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LMImagePicker/LMImagePicker-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LMImagePicker/LMImagePicker-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LMImagePicker/LMImagePicker.modulemap";
-				PRODUCT_MODULE_NAME = LMImagePicker;
-				PRODUCT_NAME = LMImagePicker;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		D11C82AF2204B41B80412B8DC9C1D652 /* Debug */ = {
+		916E0404255105F480DC4950B7625F7A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -692,8 +503,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -713,57 +522,93 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		917F435CAA26008AB29B50341739895B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEAF5549178C8FAD880F74FDD59D9677 /* Pods-LMImagePicker_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EE27D93D58D7E10E3BA72F615130F4BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D92C712EAFAEF35D40BA9E5ABCED7164 /* Pods-LMImagePicker_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		17CBB4DFBE215377643CEEFA908FB732 /* Build configuration list for PBXNativeTarget "Pods-LMImagePicker_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D11C82AF2204B41B80412B8DC9C1D652 /* Debug */,
-				96434B6C8FF320C976A10DAD7174A4BB /* Release */,
+				EE27D93D58D7E10E3BA72F615130F4BC /* Debug */,
+				917F435CAA26008AB29B50341739895B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		416480B2EA869B1B3E8444837C8CDD0F /* Build configuration list for PBXNativeTarget "LMImagePicker" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C9617375E9E8271437CF15996FC13DF0 /* Debug */,
-				C7CAD7BD32AEB29F28CE5F7629F74981 /* Release */,
+				916E0404255105F480DC4950B7625F7A /* Debug */,
+				8F17DC3A99F99FBAD606CE6963886315 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A96A3417909FA3F117CAA9F0AF0D6312 /* Build configuration list for PBXNativeTarget "Pods-LMImagePicker_Example" */ = {
+		A7B1BBF864FAD8FA6C86DE808BE1F445 /* Build configuration list for PBXNativeTarget "LMImagePicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2FF88D38B55DC6A6A562D4BA75912C07 /* Debug */,
-				AE94CD4A8CA9BE3CCBCCA166AD47814F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C82B2C0990BE06900823C6E2A4C4A1A5 /* Build configuration list for PBXNativeTarget "Pods-LMImagePicker_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8DEE643ACC2C8C4421363B586DB52DE3 /* Debug */,
-				A11F74AA5077042D656213FFDFF29FC0 /* Release */,
+				27699BF8BAF46F0A38E45D1249B69F1F /* Debug */,
+				158790A203498CBCAC46EE75FDA335E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
