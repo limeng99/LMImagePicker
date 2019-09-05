@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)lm_isIPhoneX;
 + (CGFloat)lm_statusBarHeight;
 + (CGFloat)lm_statusBarHideHeight;
++ (CGFloat)lm_navBarHeight;
 + (NSDictionary *)lm_getInfoDictionary;
 
 @end

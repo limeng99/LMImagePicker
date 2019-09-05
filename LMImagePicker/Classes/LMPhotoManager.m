@@ -150,7 +150,6 @@ static dispatch_once_t onceToken;
 }
 
 #pragma mark - Get Assets
-/// Get Assets
 - (void)getAssetsFromFetchResult:(PHFetchResult *)result completion:(void (^)(NSArray<LMAssetModel *> *))completion {
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
     return [self getAssetsFromFetchResult:result allowPickingVideo:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage completion:completion];
@@ -215,9 +214,6 @@ static dispatch_once_t onceToken;
     if (phAsset.mediaType == PHAssetMediaTypeVideo)      type = LMAssetModelMediaTypeVideo;
     else if (phAsset.mediaType == PHAssetMediaTypeAudio) type = LMAssetModelMediaTypeAudio;
     else if (phAsset.mediaType == PHAssetMediaTypeImage) {
-        if (@available(iOS 9.1, *)) {
-            // if (asset.mediaSubtypes == PHAssetMediaSubTypePhotoLive) type = LMAssetModelMediaTypeLivePhoto;
-        }
         // Gif
         if ([[phAsset valueForKey:@"filename"] hasSuffix:@"GIF"]) {
             type = LMAssetModelMediaTypePhotoGif;
@@ -440,7 +436,6 @@ static dispatch_once_t onceToken;
 }
 
 #pragma mark - Get Video
-
 /// Get Video / 获取视频
 - (void)getVideoWithAsset:(PHAsset *)asset completion:(void (^)(AVPlayerItem *, NSDictionary *))completion {
     [self getVideoWithAsset:asset progressHandler:nil completion:completion];
@@ -463,7 +458,6 @@ static dispatch_once_t onceToken;
 
 
 #pragma mark - Save photo
-
 - (void)savePhotoWithImage:(UIImage *)image completion:(void (^)(PHAsset *asset, NSError *error))completion {
     [self savePhotoWithImage:image location:nil completion:completion];
 }
@@ -494,7 +488,6 @@ static dispatch_once_t onceToken;
 
 
 #pragma mark - Save video
-
 - (void)saveVideoWithUrl:(NSURL *)url completion:(void (^)(PHAsset *asset, NSError *error))completion {
     [self saveVideoWithUrl:url location:nil completion:completion];
 }

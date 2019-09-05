@@ -21,12 +21,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class PHAsset;
 @interface LMAssetModel : NSObject
 
-@property (nonatomic, strong) PHAsset *asset;
-@property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, strong) PHAsset   *asset;
+@property (nonatomic, assign) BOOL      isSelected;
+@property (assign, nonatomic) BOOL      needOscillatoryAnimation;
 @property (nonatomic, assign) LMAssetModelMediaType type;
-@property (assign, nonatomic) BOOL needOscillatoryAnimation;
-@property (nonatomic, copy) NSString *timeLength;
-@property (strong, nonatomic) UIImage *cachedImage;
+@property (nonatomic, copy) NSString    *timeLength;
+@property (nonatomic, strong, nullable) UIImage *cachedImage;
 
 + (instancetype)modelWithAsset:(PHAsset *)asset type:(LMAssetModelMediaType)type;
 + (instancetype)modelWithAsset:(PHAsset *)asset type:(LMAssetModelMediaType)type timeLength:(NSString *)timeLength;
@@ -36,18 +36,16 @@ NS_ASSUME_NONNULL_BEGIN
 @class PHFetchResult;
 @interface LMAlbumModel : NSObject
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, strong) NSString      *name;
+@property (nonatomic, assign) NSInteger     count;
 @property (nonatomic, strong) PHFetchResult *result;
 
-@property (nonatomic, strong) NSArray *models;
-@property (nonatomic, strong) NSArray *selectedModels;
-@property (nonatomic, assign) NSUInteger selectedCount;
-
-@property (nonatomic, assign) BOOL isCameraRoll;
+@property (nonatomic, strong) NSArray       *models;
+@property (nonatomic, strong) NSArray       *selectedModels;
+@property (nonatomic, assign) NSUInteger    selectedCount;
+@property (nonatomic, assign) BOOL          isCameraRoll;
 
 - (void)setResult:(PHFetchResult *)result needFetchAssets:(BOOL)needFetchAssets;
-
 
 @end
 

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIImage *)imageNamedFromMyBundle:(NSString *)name;
 + (UIImage *)createImageWithColor:(nullable UIColor *)color size:(CGSize)size radius:(CGFloat)radius;
-
+- (UIImage *)imageWithTintColor:(UIColor *)color;
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
+#import "LMPhotoPickerController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -76,6 +77,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Default is No, if set YES, the result photo will not be scaled to photoWidth pixel width. The photoWidth default is 828px
 @property (assign, nonatomic) BOOL notScaleImage;
 
+/// Default is No
+@property (nonatomic, assign) BOOL statusBarHidden;
+
 /// The photos user have selected
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
 @property (nonatomic, strong) NSMutableArray<LMAssetModel *> *selectedModels;
@@ -99,14 +103,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// Language bundle
 @property (nonatomic, strong) NSBundle *languageBundle;
 
-#pragma mark -
-- (UIAlertController *)showAlertWithTitle:(NSString *)title;
-- (void)hideAlertView:(UIAlertController *)alertView;
-- (void)showProgressHUD;
-- (void)hideProgressHUD;
 @property (nonatomic, assign) BOOL isSelectOriginalPhoto;
 
+/// Blur effect style
+@property (nonatomic, assign) UIBlurEffectStyle blurEffectStyle;
+
 #pragma mark -
+@property (nonatomic, strong) UIImage *navBackImage;
 @property (nonatomic, strong) UIImage *takePictureImage;
 @property (nonatomic, strong) UIImage *photoSelImage;
 @property (nonatomic, strong) UIImage *photoNorImage;
@@ -142,6 +145,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)imagePicker:(LMImagePicker *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto;
 - (void)imagePicker:(LMImagePicker *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos;
 - (void)imagePickerDidCancel:(LMImagePicker *)picker;
+
+// If user picking a video, this callback will be called.
+- (void)imagePicker:(LMImagePicker *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset;
+
+// If user picking a gif image, this callback will be called.
+- (void)imagePicker:(LMImagePicker *)picker didFinishPickingGifImage:(UIImage *)animatedImage sourceAssets:(PHAsset *)asset;
 
 // Decide album show or not't
 - (BOOL)isAlbumCanSelect:(NSString *)albumName result:(PHFetchResult *)result;

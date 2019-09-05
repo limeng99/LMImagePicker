@@ -12,12 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class LMAlbumModel;
 @interface LMPhotoPickerController : UIViewController
 
-@property (nonatomic, assign) NSInteger columnNumber;
-@property (nonatomic, strong) LMAlbumModel *model;
-
-- (void)showSetting;
-- (void)hideSetting;
-
 
 @end
 

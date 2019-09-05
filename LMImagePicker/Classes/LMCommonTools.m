@@ -7,6 +7,7 @@
 //
 
 #import "LMCommonTools.h"
+#import "LMImagePicker.h"
 
 @implementation LMCommonTools
 
@@ -25,6 +26,13 @@
 
 + (CGFloat)lm_statusBarHideHeight {
     return [self lm_isIPhoneX] ? 20 : 0;
+}
+
++ (CGFloat)lm_navBarHeight {
+    if ([LMImagePicker sharedImagePicker].statusBarHidden) {
+        return [self lm_statusBarHideHeight] + 44;
+    }
+    return  [self lm_statusBarHeight] + 44;
 }
 
 + (NSDictionary *)lm_getInfoDictionary {

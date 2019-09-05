@@ -20,37 +20,44 @@
 #import "UIButton+LMImagePicker.h"
 
 @interface LMPhotoPickerController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate> {
-    NSMutableArray *_models;
     
-    UIView *_bottomToolBar;
-    UIButton *_previewButton;
-    UIButton *_doneButton;
-    UIImageView *_numberImageView;
-    UILabel *_numberLabel;
-    UIButton *_originalPhotoButton;
-    UILabel *_originalPhotoLabel;
-    UIView *_divideLine;
+    NSTimer     *_timer;
+    UILabel     *_tipLabel;
+    UIButton    *_settingBtn;
     
-    BOOL _shouldScrollToBottom;
-    BOOL _showTakePhotoBtn;
+    UIView      *_HUDContainer;
+    UILabel     *_HUDLabel;
+    UIButton    *_progressHUD;
+    UIActivityIndicatorView *_HUDIndicatorView;
     
-    CGFloat _offsetItemCount;
-    
-    UIView *_navBarView;
-    UIButton *_titleBtn;
-    
-    UILabel *_tipLabel;
-    UIButton *_settingBtn;
-}
-@property CGRect previousPreheatRect;
-@property (nonatomic, assign) BOOL isSelectOriginalPhoto;
-@property (nonatomic, strong) LMCollectionView *collectionView;
-@property (strong, nonatomic) UICollectionViewFlowLayout *layout;
-@property (nonatomic, strong) UIImagePickerController *imagePickerVc;
-@property (strong, nonatomic) CLLocation *location;
-@property (assign, nonatomic) BOOL useCachedImage;
+    UIView      *_navBarView;
+    UIButton    *_titleBtn;
 
-@property (nonatomic, strong) LMAlbumPickerController *albumPickerVc;
+    UIView      *_bottomToolBar;
+    UIButton    *_doneButton;
+    UIImageView *_numberImageView;
+    UILabel     *_numberLabel;
+    UIButton    *_originalPhotoButton;
+    UILabel     *_originalPhotoLabel;
+    UIView      *_divideLine;
+    
+}
+
+@property CGRect previousPreheatRect;
+
+@property (nonatomic, assign) BOOL          isSelectOriginalPhoto;
+@property (nonatomic, assign) BOOL          showTakePhotoBtn;
+@property (nonatomic, assign) BOOL          useCachedImage;
+@property (nonatomic, assign) NSInteger     columnNumber;
+
+@property (nonatomic, strong) LMAlbumPickerController   *albumPickerVc;
+@property (nonatomic, strong) LMAlbumModel              *model;
+@property (nonatomic, strong) NSMutableArray<LMAssetModel *> *models;
+
+@property (nonatomic, strong) LMCollectionView           *collectionView;
+@property (strong, nonatomic) UICollectionViewFlowLayout *layout;
+@property (nonatomic, strong) UIImagePickerController    *imagePickerVc;
+
 
 @end
 
@@ -59,8 +66,365 @@ static CGFloat itemMargin = 5;
 
 @implementation LMPhotoPickerController
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+- (void)dealloc {
+     NSLog(@"%@ dealloc",NSStringFromClass(self.class));
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    
+    // Determine the size of the thumbnails to request from the PHCachingImageManager
+    CGFloat scale = 2.0;
+    if ([UIScreen mainScreen].bounds.size.width > 600) {
+        scale = 1.0;
+    }
+    CGSize cellSize = ((UICollectionViewFlowLayout *)_collectionView.collectionViewLayout).itemSize;
+    AssetGridThumbnailSize = CGSizeMake(cellSize.width * scale, cellSize.height * scale);
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return [LMImagePicker sharedImagePicker].statusBarHidden;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
+    imagePicker.isSelectOriginalPhoto = _isSelectOriginalPhoto;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
+    _isSelectOriginalPhoto = imagePicker.isSelectOriginalPhoto;
+    _columnNumber = imagePicker.columnNumber;
+    _showTakePhotoBtn = imagePicker.allowTakePicture;
+    
+    self.view.backgroundColor = imagePicker.themeColor;
+    [self albumAuthorizationDetection];
+    [self setupNavBar];
+}
+
+
+#pragma mark - Authoruzation
+- (void)albumAuthorizationDetection {
+    
+    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
+    if (![[LMPhotoManager manager] authorizationStatusAuthorized]) {
+        [self setupTipSetting];
+        if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusNotDetermined) {
+            _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(observeAuthrizationStatusChange) userInfo:nil repeats:NO];
+        }
+        
+    } else {
+        [self showProgressHUD];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [[LMPhotoManager manager] getCameraRollAlbum:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage needFetchAssets:YES completion:^(LMAlbumModel *model) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    self.model = model;
+                });
+            }];
+        });
+    }
+}
+
+- (void)observeAuthrizationStatusChange {
+    [_timer invalidate];
+    _timer = nil;
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusNotDetermined) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(observeAuthrizationStatusChange) userInfo:nil repeats:NO];
+    }
+    
+    if ([[LMPhotoManager manager] authorizationStatusAuthorized]) {
+        [_tipLabel removeFromSuperview];
+        [_settingBtn removeFromSuperview];
+        LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
+        [self showProgressHUD];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [[LMPhotoManager manager] getCameraRollAlbum:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage needFetchAssets:YES completion:^(LMAlbumModel *model) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    self.model = model;
+                });
+            }];
+        });
+    }
+}
+
+#pragma mark - Progress
+- (void)showProgressHUD {
+    if (!_progressHUD) {
+        
+        CGFloat progressHUDY = 64;
+        
+        _progressHUD = [UIButton buttonWithType:UIButtonTypeCustom];
+        _progressHUD.frame = CGRectMake(0, progressHUDY, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - progressHUDY);
+        [_progressHUD setBackgroundColor:[UIColor clearColor]];
+        
+        _HUDContainer = [[UIView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 120) / 2, (_progressHUD.lm_height - 90 - progressHUDY) / 2, 120, 90)];
+        _HUDContainer.layer.cornerRadius = 8;
+        _HUDContainer.clipsToBounds = YES;
+        _HUDContainer.backgroundColor = [UIColor darkGrayColor];
+        _HUDContainer.alpha = 0.7;
+        
+        _HUDIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        _HUDIndicatorView.frame = CGRectMake(45, 15, 30, 30);
+        
+        _HUDLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,40, 120, 50)];
+        _HUDLabel.textAlignment = NSTextAlignmentCenter;
+        _HUDLabel.text = [LMImagePicker sharedImagePicker].processHintStr;
+        _HUDLabel.font = [UIFont systemFontOfSize:15];
+        _HUDLabel.textColor = [UIColor whiteColor];
+        
+        [_HUDContainer addSubview:_HUDLabel];
+        [_HUDContainer addSubview:_HUDIndicatorView];
+        [_progressHUD addSubview:_HUDContainer];
+    }
+    [_HUDIndicatorView startAnimating];
+    UIWindow *applicationWindow;
+    if ([[[UIApplication sharedApplication] delegate] respondsToSelector:@selector(window)]) {
+        applicationWindow = [[[UIApplication sharedApplication] delegate] window];
+    } else {
+        applicationWindow = [[UIApplication sharedApplication] keyWindow];
+    }
+    [applicationWindow addSubview:_progressHUD];
+    
+    // if over time, dismiss HUD automatic
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([LMImagePicker sharedImagePicker].timeout * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf hideProgressHUD];
+    });
+}
+
+- (void)hideProgressHUD {
+    if (_progressHUD) {
+        [_HUDIndicatorView stopAnimating];
+        [_progressHUD removeFromSuperview];
+    }
+}
+
+#pragma mark - Model
+- (void)setModel:(LMAlbumModel *)model {
+    _model = model;
+    NSString *title = !model.name ? @"Photos" : model.name;
+    [_titleBtn setTitle:title forState:UIControlStateNormal];
+    [_titleBtn lm_setButtonImagePosition:LMButtonImagePositionRight spacing:6];
+    
+    if (model.isCameraRoll) {
+        _models = [NSMutableArray arrayWithArray:model.models];
+        [self checkSelectedModels];
+        [self initSubviews];
+    } else {
+        [[LMPhotoManager manager] getAssetsFromFetchResult:self.model.result completion:^(NSArray<LMAssetModel *> *models) {
+            self.models = [NSMutableArray arrayWithArray:models];
+            [self initSubviews];
+        }];
+    }
+}
+
+- (void)checkSelectedModels {
+    NSMutableArray *selectedAssets = [NSMutableArray array];
+    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
+    for (LMAssetModel *model in imagePicker.selectedModels) {
+        [selectedAssets addObject:model.asset];
+    }
+    for (LMAssetModel *model in _models) {
+        model.isSelected = NO;
+        if ([selectedAssets containsObject:model.asset]) {
+            model.isSelected = YES;
+        }
+    }
+}
+
+#pragma mark - Setup view
+- (void)setupTipSetting {
+    _tipLabel = [[UILabel alloc] init];
+    _tipLabel.frame = CGRectMake(8, 120, self.view.lm_width - 16, 60);
+    _tipLabel.textAlignment = NSTextAlignmentCenter;
+    _tipLabel.numberOfLines = 0;
+    _tipLabel.font = [UIFont systemFontOfSize:16];
+    _tipLabel.textColor = [LMImagePicker sharedImagePicker].textColor;
+    
+    NSDictionary *infoDict = [LMCommonTools lm_getInfoDictionary];
+    NSString *appName = [infoDict valueForKey:@"CFBundleDisplayName"];
+    if (!appName) appName = [infoDict valueForKey:@"CFBundleName"];
+    NSString *tipText = [NSString stringWithFormat:[NSBundle localizedStringForKey:@"Allow %@ to access your album in \"Settings -> Privacy -> Photos\""],appName];
+    _tipLabel.text = tipText;
+    [self.view addSubview:_tipLabel];
+    
+    _settingBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_settingBtn setTitle:[LMImagePicker sharedImagePicker].settingBtnTitleStr forState:UIControlStateNormal];
+    _settingBtn.frame = CGRectMake(0, 180, self.view.lm_width, 44);
+    _settingBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+    [_settingBtn addTarget:self action:@selector(settingBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_settingBtn];
+}
+
+
+- (void)setupNavBar {
+    
+    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
+    
+    CGFloat navBarHegight = [LMCommonTools lm_navBarHeight];
+    
+    _navBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.lm_width, navBarHegight)];
+    _navBarView.backgroundColor = [imagePicker.themeColor colorWithAlphaComponent:0.6];
+    [self.view addSubview:_navBarView];
+    
+    UIBlurEffect *barEffect = [UIBlurEffect effectWithStyle:imagePicker.blurEffectStyle];
+    UIVisualEffectView *barEffectView = [[UIVisualEffectView alloc] initWithEffect:barEffect];
+    barEffectView.frame = _navBarView.bounds;
+    [_navBarView addSubview:barEffectView];
+    
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 30, 30)];
+    backBtn.lm_bottom = navBarHegight - 7;
+    [backBtn setImage:imagePicker.navBackImage forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_navBarView addSubview:backBtn];
+    
+    NSString *title = [NSBundle localizedStringForKey:@"Photos"];
+    _titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.lm_width-180, 44)];
+    _titleBtn.lm_bottom = navBarHegight;
+    _titleBtn.lm_centerX = self.view.lm_width*0.5;
+    _titleBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
+    [_titleBtn setTitleColor:[LMImagePicker sharedImagePicker].textColor forState:UIControlStateNormal];
+    [_titleBtn setTitle:title forState:UIControlStateNormal];
+    [_titleBtn setImage:imagePicker.photoAlbumArrowImage forState:UIControlStateNormal];
+    [_titleBtn lm_setButtonImagePosition:LMButtonImagePositionRight spacing:6];
+    [_titleBtn addTarget:self action:@selector(albumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_navBarView addSubview:_titleBtn];
+
+}
+
+- (void)initSubviews {
+    if (!_collectionView) {
+        [self configCollectionView];
+        [self configBottomToolBar];
+        [self.view bringSubviewToFront:self.albumPickerVc.view];
+        [self.view bringSubviewToFront:self->_navBarView];
+    } else {
+        [self.collectionView reloadData];
+    }
+}
+
+- (void)configCollectionView {
+    _layout = [[UICollectionViewFlowLayout alloc] init];
+    CGFloat itemWH = (self.view.lm_width - (self.columnNumber + 1) * itemMargin) / self.columnNumber;
+    _layout.itemSize = CGSizeMake(itemWH, itemWH);
+    _layout.minimumInteritemSpacing = itemMargin;
+    _layout.minimumLineSpacing = itemMargin;;
+
+    _collectionView = [[LMCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_layout];
+    _collectionView.frame = CGRectMake(0, 0, self.view.lm_width, self.view.lm_height);
+    _collectionView.backgroundColor = [UIColor clearColor];
+    _collectionView.dataSource = self;
+    _collectionView.delegate = self;
+    _collectionView.alwaysBounceHorizontal = NO;
+    _collectionView.contentInset = UIEdgeInsetsMake(itemMargin+_navBarView.lm_height, itemMargin, itemMargin, itemMargin);
+    
+    if (_showTakePhotoBtn) {
+        _collectionView.contentSize = CGSizeMake(self.view.lm_width, ((_model.count + self.columnNumber) / self.columnNumber) * self.view.lm_width);
+    } else {
+        _collectionView.contentSize = CGSizeMake(self.view.lm_width, ((_model.count + self.columnNumber - 1) / self.columnNumber) * self.view.lm_width);
+    }
+    [self.view addSubview:_collectionView];
+    [_collectionView registerClass:[LMAssetCell class] forCellWithReuseIdentifier:@"LMAssetCell"];
+    [_collectionView registerClass:[LMAssetCameraCell class] forCellWithReuseIdentifier:@"LMAssetCameraCell"];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+#ifdef __IPHONE_11_0
+    if (@available(iOS 11.0, *)) {
+        _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+#endif
+}
+
+- (void)configBottomToolBar {
+    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
+    if (!imagePicker.showSelectBtn) return;
+    
+    CGFloat toolBarHeight = [LMCommonTools lm_isIPhoneX] ? 83 : 49;
+    CGFloat toolBarTop = self.view.lm_height - toolBarHeight;
+    
+    _bottomToolBar = [[UIView alloc] initWithFrame:CGRectZero];
+    _bottomToolBar.frame = CGRectMake(0, toolBarTop, self.view.lm_width, toolBarHeight);
+    _bottomToolBar.backgroundColor = [imagePicker.themeColor colorWithAlphaComponent:0.6];
+    
+    UIBlurEffect *barEffect = [UIBlurEffect effectWithStyle:imagePicker.blurEffectStyle];
+    UIVisualEffectView *barEffectView = [[UIVisualEffectView alloc] initWithEffect:barEffect];
+    barEffectView.frame = _bottomToolBar.bounds;
+    [_bottomToolBar addSubview:barEffectView];
+
+    if (imagePicker.allowPickingOriginalPhoto) {
+        _originalPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGFloat fullImageWidth = [imagePicker.fullImageBtnTitleStr boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size.width;
+        _originalPhotoButton.frame = CGRectMake(0, 0, fullImageWidth + 56, 49);
+        _originalPhotoButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+        [_originalPhotoButton addTarget:self action:@selector(originalPhotoButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        _originalPhotoButton.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_originalPhotoButton setTitle:imagePicker.fullImageBtnTitleStr forState:UIControlStateNormal];
+        [_originalPhotoButton setTitle:imagePicker.fullImageBtnTitleStr forState:UIControlStateSelected];
+        [_originalPhotoButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_originalPhotoButton setTitleColor:imagePicker.textColor forState:UIControlStateSelected];
+        [_originalPhotoButton setImage:imagePicker.photoOriginNorImage forState:UIControlStateNormal];
+        [_originalPhotoButton setImage:imagePicker.photoOriginSelImage forState:UIControlStateSelected];
+        _originalPhotoButton.imageView.clipsToBounds = YES;
+        _originalPhotoButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _originalPhotoButton.selected = _isSelectOriginalPhoto;
+        _originalPhotoButton.enabled = imagePicker.selectedModels.count > 0;
+        
+        _originalPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(fullImageWidth + 46, 0, 80, 49)];
+        _originalPhotoLabel.textAlignment = NSTextAlignmentLeft;
+        _originalPhotoLabel.font = [UIFont systemFontOfSize:16];
+        _originalPhotoLabel.textColor = imagePicker.textColor;
+        if (_isSelectOriginalPhoto) [self getSelectedPhotoBytes];
+    }
+    
+    _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _doneButton.frame = CGRectMake(self.view.lm_width - _doneButton.lm_width - 12, 0, _doneButton.lm_width, 50);
+    _doneButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [_doneButton addTarget:self action:@selector(doneButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [_doneButton setTitle:imagePicker.doneBtnTitleStr forState:UIControlStateNormal];
+    [_doneButton setTitle:imagePicker.doneBtnTitleStr forState:UIControlStateDisabled];
+    [_doneButton setTitleColor:imagePicker.btnTitleColorNormal forState:UIControlStateNormal];
+    [_doneButton setTitleColor:imagePicker.btnTitleColorDisabled forState:UIControlStateDisabled];
+    _doneButton.enabled = imagePicker.selectedModels.count;
+    
+    _numberImageView = [[UIImageView alloc] initWithImage:imagePicker.photoNumberIconImage];
+    _numberImageView.frame = CGRectMake(_doneButton.lm_left - 24 - 5, 13, 24, 24);
+    _numberImageView.hidden = imagePicker.selectedModels.count <= 0;
+    _numberImageView.clipsToBounds = YES;
+    _numberImageView.contentMode = UIViewContentModeScaleAspectFit;
+    _numberImageView.backgroundColor = [UIColor clearColor];
+    
+    _numberLabel = [[UILabel alloc] init];
+    _numberLabel.frame = _numberImageView.frame;
+    _numberLabel.font = [UIFont systemFontOfSize:15];
+    _numberLabel.textColor = [UIColor whiteColor];
+    _numberLabel.textAlignment = NSTextAlignmentCenter;
+    _numberLabel.text = [NSString stringWithFormat:@"%zd",imagePicker.selectedModels.count];
+    _numberLabel.hidden = imagePicker.selectedModels.count <= 0;
+    _numberLabel.backgroundColor = [UIColor clearColor];
+    
+    _divideLine = [[UIView alloc] init];
+    _divideLine.frame = CGRectMake(0, 0, self.view.lm_width, 1);
+    CGFloat rgb2 = 222 / 255.0;
+    _divideLine.backgroundColor = [UIColor colorWithRed:rgb2 green:rgb2 blue:rgb2 alpha:0.7];
+    
+    [_bottomToolBar addSubview:_divideLine];
+    [_bottomToolBar addSubview:_doneButton];
+    [_bottomToolBar addSubview:_numberImageView];
+    [_bottomToolBar addSubview:_numberLabel];
+    [_bottomToolBar addSubview:_originalPhotoButton];
+    [self.view addSubview:_bottomToolBar];
+    [_originalPhotoButton addSubview:_originalPhotoLabel];
+}
+
+
+
 - (UIImagePickerController *)imagePickerVc {
     if (_imagePickerVc == nil) {
         _imagePickerVc = [[UIImagePickerController alloc] init];
@@ -75,54 +439,7 @@ static CGFloat itemMargin = 5;
     return _imagePickerVc;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    _isSelectOriginalPhoto = imagePicker.isSelectOriginalPhoto;
-    _shouldScrollToBottom = YES;
-    
-    CGFloat hiddenStatusHeight = [LMCommonTools lm_statusBarHideHeight];
-    
-    self.view.backgroundColor = imagePicker.themeColor;;
-    _navBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.lm_width, hiddenStatusHeight+50)];
-    _navBarView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
-    [self.view addSubview:_navBarView];
-    
-    UIBlurEffect *barEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *barEffectView = [[UIVisualEffectView alloc] initWithEffect:barEffect];
-    barEffectView.frame = _navBarView.bounds;
-    [_navBarView addSubview:barEffectView];
-    
-    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, hiddenStatusHeight+10, 30, 30)];
-    [backBtn setImage:[UIImage imageNamedFromMyBundle:@"nav_back"] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_navBarView addSubview:backBtn];
-    
-    NSString *title = @"Photos";
-    _titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, hiddenStatusHeight, self.view.lm_width-180, 50)];
-    _titleBtn.lm_centerX = self.view.lm_width*0.5;
-    _titleBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
-    [_titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_titleBtn setTitle:title forState:UIControlStateNormal];
-    [_titleBtn setImage:imagePicker.photoAlbumArrowImage forState:UIControlStateNormal];
-    [_titleBtn lm_setButtonImagePosition:LMButtonImagePositionRight spacing:6];
-    [_titleBtn addTarget:self action:@selector(albumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_navBarView addSubview:_titleBtn];
-    
-}
-
-- (void)setModel:(LMAlbumModel *)model {
-    _model = model;
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    _showTakePhotoBtn = imagePicker.allowTakePicture;
-    NSString *title = !model.name ? @"Photos" : model.name;
-    [_titleBtn setTitle:title forState:UIControlStateNormal];
-    [_titleBtn lm_setButtonImagePosition:LMButtonImagePositionRight spacing:6];
-    [self fetchAssetModels];
-    [self.albumPickerVc configTableView];
-}
-
+#pragma mark - Album
 - (LMAlbumPickerController *)albumPickerVc {
     if (!_albumPickerVc) {
         _albumPickerVc = [[LMAlbumPickerController alloc] init];
@@ -153,7 +470,6 @@ static CGFloat itemMargin = 5;
 
 - (void)albumBtnClick:(UIButton *)albumBtn {
     albumBtn.selected = !albumBtn.selected;
-    
     if (albumBtn.selected) {
         [self albumShow];
     } else {
@@ -161,262 +477,31 @@ static CGFloat itemMargin = 5;
     }
 }
 
+
+#pragma mark - Alert
+- (UIAlertController *)showAlertWithTitle:(NSString *)title {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:[NSBundle localizedStringForKey:@"OK"] style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alertController animated:YES completion:nil];
+    return alertController;
+}
+
+- (void)hideAlertView:(UIAlertController *)alertView {
+    [alertView dismissViewControllerAnimated:YES completion:nil];
+    alertView = nil;
+}
+
+#pragma mark - Action
 - (void)backBtnClick:(UIButton *)backBtn {
     [self.navigationController popViewControllerAnimated:YES];
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
     imagePicker.photoPicker = nil;
 }
 
-- (void)fetchAssetModels {
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    if (!_model.models.count) {
-        [imagePicker showProgressHUD];
-    }
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        if (!imagePicker.sortAscendingByModificationDate && self->_model.isCameraRoll) {
-            [[LMPhotoManager manager] getCameraRollAlbum:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage needFetchAssets:YES completion:^(LMAlbumModel *model) {
-                self->_model = model;
-                self->_models = [NSMutableArray arrayWithArray:self->_model.models];
-                [self initSubviews];
-            }];
-        } else {
-            if (self->_showTakePhotoBtn ) {
-                [[LMPhotoManager manager] getAssetsFromFetchResult:self->_model.result completion:^(NSArray<LMAssetModel *> *models) {
-                    self->_models = [NSMutableArray arrayWithArray:models];
-                    [self initSubviews];
-                }];
-            } else {
-                self->_models = [NSMutableArray arrayWithArray:self->_model.models];
-                [self initSubviews];
-            }
-        }
-    });
-}
-
-- (void)initSubviews {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-        [imagePicker hideProgressHUD];
-        
-        [self checkSelectedModels];
-        if (!self.collectionView) {
-            [self configCollectionView];
-            self->_collectionView.hidden = YES;
-            [self configBottomToolBar];
-            [self scrollCollectionViewToBottom];
-            [self.view bringSubviewToFront:self.albumPickerVc.view];
-            [self.view bringSubviewToFront:self->_navBarView];
-            if (self->_settingBtn) {
-                [self.view bringSubviewToFront:self->_tipLabel];
-                [self.view bringSubviewToFront:self->_settingBtn];
-            }
-        } else {
-            [self.collectionView reloadData];
-        }
-    });
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    imagePicker.isSelectOriginalPhoto = _isSelectOriginalPhoto;
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
-
-- (void)configCollectionView {
-    _layout = [[UICollectionViewFlowLayout alloc] init];
-    _collectionView = [[LMCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_layout];
-    _collectionView.backgroundColor = [UIColor clearColor];
-    _collectionView.dataSource = self;
-    _collectionView.delegate = self;
-    _collectionView.alwaysBounceHorizontal = NO;
-    _collectionView.contentInset = UIEdgeInsetsMake(itemMargin+_navBarView.lm_height, itemMargin, itemMargin, itemMargin);
-    
-    if (_showTakePhotoBtn) {
-        _collectionView.contentSize = CGSizeMake(self.view.lm_width, ((_model.count + self.columnNumber) / self.columnNumber) * self.view.lm_width);
-    } else {
-        _collectionView.contentSize = CGSizeMake(self.view.lm_width, ((_model.count + self.columnNumber - 1) / self.columnNumber) * self.view.lm_width);
-    }
-    [self.view addSubview:_collectionView];
-    [_collectionView registerClass:[LMAssetCell class] forCellWithReuseIdentifier:@"LMAssetCell"];
-    [_collectionView registerClass:[LMAssetCameraCell class] forCellWithReuseIdentifier:@"LMAssetCameraCell"];
-    
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-#ifdef __IPHONE_11_0
-    if (@available(iOS 11.0, *)) {
-        _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-#endif
-    
-#pragma mark - add
-    [self albumPickerVc];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.hidden = YES;
-    
-    // Determine the size of the thumbnails to request from the PHCachingImageManager
-    CGFloat scale = 2.0;
-    if ([UIScreen mainScreen].bounds.size.width > 600) {
-        scale = 1.0;
-    }
-    CGSize cellSize = ((UICollectionViewFlowLayout *)_collectionView.collectionViewLayout).itemSize;
-    AssetGridThumbnailSize = CGSizeMake(cellSize.width * scale, cellSize.height * scale);
-}
-
-- (void)showSetting {
-    
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    
-    _tipLabel = [[UILabel alloc] init];
-    _tipLabel.frame = CGRectMake(8, 120, self.view.lm_width - 16, 60);
-    _tipLabel.textAlignment = NSTextAlignmentCenter;
-    _tipLabel.numberOfLines = 0;
-    _tipLabel.font = [UIFont systemFontOfSize:16];
-    _tipLabel.textColor = [UIColor blackColor];
-    
-    NSDictionary *infoDict = [LMCommonTools lm_getInfoDictionary];
-    NSString *appName = [infoDict valueForKey:@"CFBundleDisplayName"];
-    if (!appName) appName = [infoDict valueForKey:@"CFBundleName"];
-    NSString *tipText = [NSString stringWithFormat:[NSBundle localizedStringForKey:@"Allow %@ to access your album in \"Settings -> Privacy -> Photos\""],appName];
-    _tipLabel.text = tipText;
-    [self.view addSubview:_tipLabel];
-    
-    _settingBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_settingBtn setTitle:imagePicker.settingBtnTitleStr forState:UIControlStateNormal];
-    _settingBtn.frame = CGRectMake(0, 180, self.view.lm_width, 44);
-    _settingBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-    [_settingBtn addTarget:self action:@selector(settingBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_settingBtn];
-}
-
-- (void)hideSetting {
-    [_tipLabel removeFromSuperview];
-    [_settingBtn removeFromSuperview];
-}
-
 - (void)settingBtnClick {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
-- (void)configBottomToolBar {
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    if (!imagePicker.showSelectBtn) return;
-    
-    _bottomToolBar = [[UIView alloc] initWithFrame:CGRectZero];
-    //    CGFloat rgb = 253 / 255.0;
-    _bottomToolBar.backgroundColor = imagePicker.themeColor;
-    
-    if (imagePicker.allowPickingOriginalPhoto) {
-        _originalPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _originalPhotoButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-        [_originalPhotoButton addTarget:self action:@selector(originalPhotoButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        _originalPhotoButton.titleLabel.font = [UIFont systemFontOfSize:16];
-        [_originalPhotoButton setTitle:imagePicker.fullImageBtnTitleStr forState:UIControlStateNormal];
-        [_originalPhotoButton setTitle:imagePicker.fullImageBtnTitleStr forState:UIControlStateSelected];
-        [_originalPhotoButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [_originalPhotoButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-        [_originalPhotoButton setImage:imagePicker.photoOriginNorImage forState:UIControlStateNormal];
-        [_originalPhotoButton setImage:imagePicker.photoOriginSelImage forState:UIControlStateSelected];
-        _originalPhotoButton.imageView.clipsToBounds = YES;
-        _originalPhotoButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _originalPhotoButton.selected = _isSelectOriginalPhoto;
-        _originalPhotoButton.enabled = imagePicker.selectedModels.count > 0;
-        
-        _originalPhotoLabel = [[UILabel alloc] init];
-        _originalPhotoLabel.textAlignment = NSTextAlignmentLeft;
-        _originalPhotoLabel.font = [UIFont systemFontOfSize:16];
-        _originalPhotoLabel.textColor = [UIColor blackColor];
-        if (_isSelectOriginalPhoto) [self getSelectedPhotoBytes];
-    }
-    
-    _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _doneButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [_doneButton addTarget:self action:@selector(doneButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [_doneButton setTitle:imagePicker.doneBtnTitleStr forState:UIControlStateNormal];
-    [_doneButton setTitle:imagePicker.doneBtnTitleStr forState:UIControlStateDisabled];
-    [_doneButton setTitleColor:imagePicker.btnTitleColorNormal forState:UIControlStateNormal];
-    [_doneButton setTitleColor:imagePicker.btnTitleColorDisabled forState:UIControlStateDisabled];
-    _doneButton.enabled = imagePicker.selectedModels.count;
-    
-    _numberImageView = [[UIImageView alloc] initWithImage:imagePicker.photoNumberIconImage];
-    _numberImageView.hidden = imagePicker.selectedModels.count <= 0;
-    _numberImageView.clipsToBounds = YES;
-    _numberImageView.contentMode = UIViewContentModeScaleAspectFit;
-    _numberImageView.backgroundColor = [UIColor clearColor];
-    
-    _numberLabel = [[UILabel alloc] init];
-    _numberLabel.font = [UIFont systemFontOfSize:15];
-    _numberLabel.textColor = [UIColor whiteColor];
-    _numberLabel.textAlignment = NSTextAlignmentCenter;
-    _numberLabel.text = [NSString stringWithFormat:@"%zd",imagePicker.selectedModels.count];
-    _numberLabel.hidden = imagePicker.selectedModels.count <= 0;
-    _numberLabel.backgroundColor = [UIColor clearColor];
-    
-    _divideLine = [[UIView alloc] init];
-    CGFloat rgb2 = 222 / 255.0;
-    _divideLine.backgroundColor = [UIColor colorWithRed:rgb2 green:rgb2 blue:rgb2 alpha:0.7];
-    
-    [_bottomToolBar addSubview:_divideLine];
-    [_bottomToolBar addSubview:_previewButton];
-    [_bottomToolBar addSubview:_doneButton];
-    [_bottomToolBar addSubview:_numberImageView];
-    [_bottomToolBar addSubview:_numberLabel];
-    [_bottomToolBar addSubview:_originalPhotoButton];
-    [self.view addSubview:_bottomToolBar];
-    [_originalPhotoButton addSubview:_originalPhotoLabel];
-    
-}
-
-#pragma mark - Layout
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    
-    _collectionView.frame = CGRectMake(0, 0, self.view.lm_width, self.view.lm_height);
-    CGFloat itemWH = (self.view.lm_width - (self.columnNumber + 1) * itemMargin) / self.columnNumber;
-    _layout.itemSize = CGSizeMake(itemWH, itemWH);
-    _layout.minimumInteritemSpacing = itemMargin;
-    _layout.minimumLineSpacing = itemMargin;
-    [_collectionView setCollectionViewLayout:_layout];
-    if (_offsetItemCount > 0) {
-        CGFloat offsetY = _offsetItemCount * (_layout.itemSize.height + _layout.minimumLineSpacing);
-        [_collectionView setContentOffset:CGPointMake(0, offsetY)];
-    }
-    
-    CGFloat toolBarHeight = [LMCommonTools lm_isIPhoneX] ? 50 + (83 - 49) : 50;
-    CGFloat toolBarTop = self.view.lm_height - toolBarHeight;
-    _bottomToolBar.frame = CGRectMake(0, toolBarTop, self.view.lm_width, toolBarHeight);
-
-    if (imagePicker.allowPickingOriginalPhoto) {
-        CGFloat fullImageWidth = [imagePicker.fullImageBtnTitleStr boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size.width;
-        _originalPhotoButton.frame = CGRectMake(CGRectGetMaxX(_previewButton.frame), 0, fullImageWidth + 56, 50);
-        _originalPhotoLabel.frame = CGRectMake(fullImageWidth + 46, 0, 80, 50);
-    }
-    [_doneButton sizeToFit];
-    _doneButton.frame = CGRectMake(self.view.lm_width - _doneButton.lm_width - 12, 0, _doneButton.lm_width, 50);
-    _numberImageView.frame = CGRectMake(_doneButton.lm_left - 24 - 5, 13, 24, 24);
-    _numberLabel.frame = _numberImageView.frame;
-    _divideLine.frame = CGRectMake(0, 0, self.view.lm_width, 1);
-    
-    [self.collectionView reloadData];
-    
-}
-
-#pragma mark - Notification
-
-- (void)didChangeStatusBarOrientationNotification:(NSNotification *)noti {
-    _offsetItemCount = _collectionView.contentOffset.y / (_layout.itemSize.height + _layout.minimumLineSpacing);
-}
-
-#pragma mark - Click Event
 - (void)originalPhotoButtonClick {
     _originalPhotoButton.selected = !_originalPhotoButton.isSelected;
     _isSelectOriginalPhoto = _originalPhotoButton.isSelected;
@@ -426,16 +511,17 @@ static CGFloat itemMargin = 5;
     }
 }
 
+#pragma mark - Click Event
 - (void)doneButtonClick {
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
     // 1.6.8 判断是否满足最小必选张数的限制
     if (imagePicker.minImagesCount && imagePicker.selectedModels.count < imagePicker.minImagesCount) {
         NSString *title = [NSString stringWithFormat:[NSBundle localizedStringForKey:@"Select a minimum of %zd photos"], imagePicker.minImagesCount];
-        [imagePicker showAlertWithTitle:title];
+        [self showAlertWithTitle:title];
         return;
     }
     
-    [imagePicker showProgressHUD];
+    [self showProgressHUD];
     NSMutableArray *assets = [NSMutableArray array];
     NSMutableArray *photos;
     NSMutableArray *infoArr;
@@ -467,14 +553,14 @@ static CGFloat itemMargin = 5;
                 for (id item in photos) { if ([item isKindOfClass:[NSNumber class]]) return; }
                 
                 if (havenotShowAlert) {
-                    [imagePicker hideAlertView:alertView];
+                    [self hideAlertView:alertView];
                     [self didGetAllPhotos:photos assets:assets infoArr:infoArr];
                 }
             } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
                 // 如果图片正在从iCloud同步中,提醒用户
                 if (progress < 1 && havenotShowAlert && !alertView) {
-                    [imagePicker hideProgressHUD];
-                    alertView = [imagePicker showAlertWithTitle:[NSBundle localizedStringForKey:@"SyncLMonizing photos from iCloud"]];
+                    [self hideProgressHUD];
+                    alertView = [self showAlertWithTitle:[NSBundle localizedStringForKey:@"SyncLMonizing photos from iCloud"]];
                     havenotShowAlert = NO;
                     return;
                 }
@@ -490,9 +576,7 @@ static CGFloat itemMargin = 5;
 }
 
 - (void)didGetAllPhotos:(NSArray *)photos assets:(NSArray *)assets infoArr:(NSArray *)infoArr {
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    [imagePicker hideProgressHUD];
-    
+    [self hideProgressHUD];
     [self callDelegateMethodWithPhotos:photos assets:assets infoArr:infoArr];
 }
 
@@ -500,7 +584,9 @@ static CGFloat itemMargin = 5;
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
     if (imagePicker.allowPickingVideo && imagePicker.maxImagesCount == 1) {
         if ([[LMPhotoManager manager] isVideo:[assets firstObject]]) {
-
+            if ([imagePicker.pickerDelegate respondsToSelector:@selector(imagePicker:didFinishPickingVideo:sourceAssets:)]) {
+                [imagePicker.pickerDelegate imagePicker:imagePicker didFinishPickingVideo:[photos firstObject] sourceAssets:[assets firstObject]];
+            }
             return;
         }
     }
@@ -514,7 +600,6 @@ static CGFloat itemMargin = 5;
 }
 
 #pragma mark - UICollectionViewDataSource && Delegate
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (_showTakePhotoBtn) {
         return _models.count + 1;
@@ -604,7 +689,7 @@ static CGFloat itemMargin = 5;
                 [UIView showOscillatoryAnimationWithLayer:strongLayer type:LMOscillatoryAnimationToSmaller];
             } else {
                 NSString *title = [NSString stringWithFormat:[NSBundle localizedStringForKey:@"Select a maximum of %zd photos"], imagePicker.maxImagesCount];
-                [imagePicker showAlertWithTitle:title];
+                [self showAlertWithTitle:title];
             }
         }
     };
@@ -625,14 +710,7 @@ static CGFloat itemMargin = 5;
 //    LMAssetModel *model = _models[index];
 }
 
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    // [self updateCachedAssets];
-}
-
 #pragma mark - Private Method
-
 - (void)setUseCachedImageAndReloadData {
     self.useCachedImage = YES;
     [self.collectionView reloadData];
@@ -688,7 +766,6 @@ static CGFloat itemMargin = 5;
 - (void)refreshBottomToolBarStatus {
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
     
-    _previewButton.enabled = imagePicker.selectedModels.count > 0;
     _doneButton.enabled = imagePicker.selectedModels.count > 0;
     
     _numberImageView.hidden = imagePicker.selectedModels.count <= 0;
@@ -708,42 +785,7 @@ static CGFloat itemMargin = 5;
     }];
 }
 
-- (void)scrollCollectionViewToBottom {
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    if (_shouldScrollToBottom && _models.count > 0) {
-        NSInteger item = 0;
-        if (imagePicker.sortAscendingByModificationDate) {
-            item = _models.count - 1;
-            if (_showTakePhotoBtn) {
-                item += 1;
-            }
-        }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self->_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
-            self->_shouldScrollToBottom = NO;
-            self->_collectionView.hidden = NO;
-        });
-    } else {
-        _collectionView.hidden = NO;
-    }
-}
-
-- (void)checkSelectedModels {
-    NSMutableArray *selectedAssets = [NSMutableArray array];
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    for (LMAssetModel *model in imagePicker.selectedModels) {
-        [selectedAssets addObject:model.asset];
-    }
-    for (LMAssetModel *model in _models) {
-        model.isSelected = NO;
-        if ([selectedAssets containsObject:model.asset]) {
-            model.isSelected = YES;
-        }
-    }
-}
-
 #pragma mark - UIAlertViewDelegate
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) { // 去设置界面，开启相机访问权限
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
@@ -751,33 +793,28 @@ static CGFloat itemMargin = 5;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
-
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
     if ([type isEqualToString:@"public.image"]) {
-        LMImagePicker *imagePickerVc = [LMImagePicker sharedImagePicker];
-        [imagePickerVc showProgressHUD];
+        [self showProgressHUD];
         UIImage *photo = [info objectForKey:UIImagePickerControllerOriginalImage];
         if (photo) {
-            [[LMPhotoManager manager] savePhotoWithImage:photo location:self.location completion:^(PHAsset *asset, NSError *error){
+            [[LMPhotoManager manager] savePhotoWithImage:photo location:nil completion:^(PHAsset *asset, NSError *error){
                 if (!error) {
                     [self addPHAsset:asset];
                 }
             }];
-            self.location = nil;
         }
     } else if ([type isEqualToString:@"public.movie"]) {
-        LMImagePicker *imagePickerVc = [LMImagePicker sharedImagePicker];
-        [imagePickerVc showProgressHUD];
+        [self showProgressHUD];
         NSURL *videoUrl = [info objectForKey:UIImagePickerControllerMediaURL];
         if (videoUrl) {
-            [[LMPhotoManager manager] saveVideoWithUrl:videoUrl location:self.location completion:^(PHAsset *asset, NSError *error) {
+            [[LMPhotoManager manager] saveVideoWithUrl:videoUrl location:nil completion:^(PHAsset *asset, NSError *error) {
                 if (!error) {
                     [self addPHAsset:asset];
                 }
             }];
-            self.location = nil;
         }
     }
 }
@@ -785,7 +822,7 @@ static CGFloat itemMargin = 5;
 - (void)addPHAsset:(PHAsset *)asset {
     LMAssetModel *assetModel = [[LMPhotoManager manager] createModelWithAsset:asset];
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    [imagePicker hideProgressHUD];
+    [self hideProgressHUD];
     if (imagePicker.sortAscendingByModificationDate) {
         [_models addObject:assetModel];
     } else {
@@ -810,131 +847,13 @@ static CGFloat itemMargin = 5;
     _collectionView.hidden = YES;
     [_collectionView reloadData];
     
-    _shouldScrollToBottom = YES;
-    [self scrollCollectionViewToBottom];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)dealloc {
-    // NSLog(@"%@ dealloc",NSStringFromClass(self.class));
-}
-
-#pragma mark - Asset Caching
-
-- (void)resetCachedAssets {
-//    [[LMPhotoManager manager].cachingImageManager stopCachingImagesForAllAssets];
-    self.previousPreheatRect = CGRectZero;
-}
-
-- (void)updateCachedAssets {
-    BOOL isViewVisible = [self isViewLoaded] && [[self view] window] != nil;
-    if (!isViewVisible) { return; }
-    
-    // The preheat window is twice the height of the visible rect.
-    CGRect preheatRect = _collectionView.bounds;
-    preheatRect = CGRectInset(preheatRect, 0.0f, -0.5f * CGRectGetHeight(preheatRect));
-    
-    /*
-     Check if the collection view is showing an area that is significantly
-     different to the last preheated area.
-     */
-    CGFloat delta = ABS(CGRectGetMidY(preheatRect) - CGRectGetMidY(self.previousPreheatRect));
-    if (delta > CGRectGetHeight(_collectionView.bounds) / 3.0f) {
-        
-        // Compute the assets to start caching and to stop caching.
-        NSMutableArray *addedIndexPaths = [NSMutableArray array];
-        NSMutableArray *removedIndexPaths = [NSMutableArray array];
-        
-        [self computeDifferenceBetweenRect:self.previousPreheatRect andRect:preheatRect removedHandler:^(CGRect removedRect) {
-            NSArray *indexPaths = [self aapl_indexPathsForElementsInRect:removedRect];
-            [removedIndexPaths addObjectsFromArray:indexPaths];
-        } addedHandler:^(CGRect addedRect) {
-            NSArray *indexPaths = [self aapl_indexPathsForElementsInRect:addedRect];
-            [addedIndexPaths addObjectsFromArray:indexPaths];
-        }];
-        
-        NSArray *assetsToStartCaching = [self assetsAtIndexPaths:addedIndexPaths];
-        NSArray *assetsToStopCaching = [self assetsAtIndexPaths:removedIndexPaths];
-        
-        // Update the assets the PHCachingImageManager is caching.
-        [[LMPhotoManager manager].cachingImageManager startCachingImagesForAssets:assetsToStartCaching
-                                                                       targetSize:AssetGridThumbnailSize
-                                                                      contentMode:PHImageContentModeAspectFill
-                                                                          options:nil];
-        [[LMPhotoManager manager].cachingImageManager stopCachingImagesForAssets:assetsToStopCaching
-                                                                      targetSize:AssetGridThumbnailSize
-                                                                     contentMode:PHImageContentModeAspectFill
-                                                                         options:nil];
-        
-        // Store the preheat rect to compare against in the future.
-        self.previousPreheatRect = preheatRect;
-    }
-}
-
-- (void)computeDifferenceBetweenRect:(CGRect)oldRect andRect:(CGRect)newRect removedHandler:(void (^)(CGRect removedRect))removedHandler addedHandler:(void (^)(CGRect addedRect))addedHandler {
-    if (CGRectIntersectsRect(newRect, oldRect)) {
-        CGFloat oldMaxY = CGRectGetMaxY(oldRect);
-        CGFloat oldMinY = CGRectGetMinY(oldRect);
-        CGFloat newMaxY = CGRectGetMaxY(newRect);
-        CGFloat newMinY = CGRectGetMinY(newRect);
-        
-        if (newMaxY > oldMaxY) {
-            CGRect rectToAdd = CGRectMake(newRect.origin.x, oldMaxY, newRect.size.width, (newMaxY - oldMaxY));
-            addedHandler(rectToAdd);
-        }
-        
-        if (oldMinY > newMinY) {
-            CGRect rectToAdd = CGRectMake(newRect.origin.x, newMinY, newRect.size.width, (oldMinY - newMinY));
-            addedHandler(rectToAdd);
-        }
-        
-        if (newMaxY < oldMaxY) {
-            CGRect rectToRemove = CGRectMake(newRect.origin.x, newMaxY, newRect.size.width, (oldMaxY - newMaxY));
-            removedHandler(rectToRemove);
-        }
-        
-        if (oldMinY < newMinY) {
-            CGRect rectToRemove = CGRectMake(newRect.origin.x, oldMinY, newRect.size.width, (newMinY - oldMinY));
-            removedHandler(rectToRemove);
-        }
-    } else {
-        addedHandler(newRect);
-        removedHandler(oldRect);
-    }
-}
-
-- (NSArray *)assetsAtIndexPaths:(NSArray *)indexPaths {
-    if (indexPaths.count == 0) { return nil; }
-    
-    NSMutableArray *assets = [NSMutableArray arrayWithCapacity:indexPaths.count];
-    for (NSIndexPath *indexPath in indexPaths) {
-        if (indexPath.item < _models.count) {
-            LMAssetModel *model = _models[indexPath.item];
-            [assets addObject:model.asset];
-        }
-    }
-    
-    return assets;
-}
-
-- (NSArray *)aapl_indexPathsForElementsInRect:(CGRect)rect {
-    NSArray *allLayoutAttributes = [_collectionView.collectionViewLayout layoutAttributesForElementsInRect:rect];
-    if (allLayoutAttributes.count == 0) { return nil; }
-    NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:allLayoutAttributes.count];
-    for (UICollectionViewLayoutAttributes *layoutAttributes in allLayoutAttributes) {
-        NSIndexPath *indexPath = layoutAttributes.indexPath;
-        [indexPaths addObject:indexPath];
-    }
-    return indexPaths;
-}
-#pragma clang diagnostic pop
-
 @end
-
-
 
 @implementation LMCollectionView
 

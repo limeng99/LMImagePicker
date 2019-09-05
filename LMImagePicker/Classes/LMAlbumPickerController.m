@@ -15,40 +15,43 @@
 @interface LMAlbumPickerController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *_tableView;
 }
+
 @property (nonatomic, strong) NSMutableArray *albumArr;
+
 @end
 
 @implementation LMAlbumPickerController
 
+- (void)dealloc {
+    NSLog(@"%@ dealloc",NSStringFromClass(self.class));
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
+    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
+    self.view.backgroundColor = [imagePicker.themeColor colorWithAlphaComponent:0.6];
     
-    UIBlurEffect *barEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIBlurEffect *barEffect = [UIBlurEffect effectWithStyle:imagePicker.blurEffectStyle];
     UIVisualEffectView *barEffectView = [[UIVisualEffectView alloc] initWithEffect:barEffect];
     barEffectView.frame = self.view.bounds;
     [self.view addSubview:barEffectView];
     
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return YES;
+    [self configTableView];
 }
 
 - (void)configTableView {
-    
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [[LMPhotoManager manager] getAllAlbums:NO allowPickingImage:YES needFetchAssets:NO completion:^(NSArray<LMAlbumModel *> *models) {
+        [[LMPhotoManager manager] getAllAlbums:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage needFetchAssets:NO completion:^(NSArray<LMAlbumModel *> *models) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self->_albumArr = [NSMutableArray arrayWithArray:models];
                 for (LMAlbumModel *albumModel in self->_albumArr) {
                     albumModel.selectedModels = imagePicker.selectedModels;
                 }
-                
                 if (!self->_tableView) {
                     self->_tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+                    self->_tableView.frame = CGRectMake(0, 0, self.view.lm_width, self.view.lm_height);
                     self->_tableView.rowHeight = 70;
                     self->_tableView.backgroundColor = [UIColor clearColor];
                     self->_tableView.tableFooterView = [[UIView alloc] init];
@@ -70,22 +73,7 @@
     });
 }
 
-- (void)dealloc {
-    NSLog(@"%@ dealloc",NSStringFromClass(self.class));
-}
-
-
-#pragma mark - Layout
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    _tableView.frame = CGRectMake(0, 0, self.view.lm_width, self.view.lm_height);
-    
-}
-
 #pragma mark - UITableViewDataSource && Delegate
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _albumArr.count;
 }

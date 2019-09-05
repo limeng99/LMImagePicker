@@ -13,17 +13,6 @@
 #import "LMPhotoPickerController.h"
 #import "LMPhotoManager.h"
 
-@interface LMImagePicker(){
-    NSTimer *_timer;
-    
-    UIView *_HUDContainer;
-    UIActivityIndicatorView *_HUDIndicatorView;
-    UILabel *_HUDLabel;
-    UIButton *_progressHUD;
-}
-
-@end
-
 LMImagePicker *_imagePicker = nil;
 @implementation LMImagePicker
 
@@ -58,6 +47,7 @@ LMImagePicker *_imagePicker = nil;
         self.photoWidth = 828.0;
         self.photoPreviewMaxWidth = 600;
         self.notScaleImage = YES;
+        self.blurEffectStyle = UIBlurEffectStyleLight;
         self.cannotSelectLayerColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
         
         if (!self.allowPickingImage) {
@@ -95,36 +85,23 @@ LMImagePicker *_imagePicker = nil;
 }
 
 - (void)configDefaultImageName {
+    self.navBackImage = [UIImage imageNamedFromMyBundle:@"nav_back"];
+    self.photoAlbumArrowImage = [UIImage imageNamedFromMyBundle:@"album_arrow"];
     self.takePictureImage = [UIImage imageNamedFromMyBundle:@"takePicture"];
     self.photoSelImage = [UIImage imageNamedFromMyBundle:@"photo_select_sel"];
     self.photoNorImage = [UIImage imageNamedFromMyBundle:@"photo_select_nor"];
     self.photoNumberIconImage = [UIImage createImageWithColor:nil size:CGSizeMake(24, 24) radius:12];
-    self.photoOriginSelImage = [UIImage imageNamedFromMyBundle:@"preview_original_sel"];
-    self.photoOriginNorImage = [UIImage imageNamedFromMyBundle:@"preview_original_nor"];
-    self.photoAlbumArrowImage = [UIImage imageNamedFromMyBundle:@"album_arrow"];
+    self.photoOriginSelImage = [UIImage imageNamedFromMyBundle:@"photo_original_sel"];
+    self.photoOriginNorImage = [UIImage imageNamedFromMyBundle:@"photo_original_nor"];
 }
 
 - (LMPhotoPickerController *)photoPicker {
     if (!_photoPicker) {
         _photoPicker = [[LMPhotoPickerController alloc] init];
-        _photoPicker.columnNumber = self.columnNumber;
-
-        if (![[LMPhotoManager manager] authorizationStatusAuthorized]) {
-
-            [_photoPicker showSetting];
-
-            if ([PHPhotoLibrary authorizationStatus] == 0) {
-                _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(observeAuthrizationStatusChange) userInfo:nil repeats:NO];
-            }
-        } else {
-            [[LMPhotoManager manager] getCameraRollAlbum:self.allowPickingVideo allowPickingImage:self.allowPickingImage needFetchAssets:NO completion:^(LMAlbumModel *model) {
-                self->_photoPicker.model = model;
-            }];
-        }
-        
     }
     return _photoPicker;
 }
+
 
 - (void)setTimeout:(NSInteger)timeout {
     _timeout = timeout;
@@ -138,6 +115,12 @@ LMImagePicker *_imagePicker = nil;
 - (void)setPickerDelegate:(id<LMImagePickerDelegate>)pickerDelegate {
     _pickerDelegate = pickerDelegate;
     [LMPhotoManager manager].pickerDelegate = pickerDelegate;
+}
+
+- (void)setTextColor:(UIColor *)textColor {
+    _textColor = textColor;
+    self.navBackImage = [[UIImage imageNamedFromMyBundle:@"nav_back"] imageWithTintColor:self.textColor];
+    self.photoAlbumArrowImage = [[UIImage imageNamedFromMyBundle:@"album_arrow"] imageWithTintColor:self.textColor];
 }
 
 - (void)setColumnNumber:(NSInteger)columnNumber {
@@ -193,87 +176,5 @@ LMImagePicker *_imagePicker = nil;
     [_selectedModels removeObject:model];
     [_selectedAssetIds removeObject:model.asset.localIdentifier];
 }
-
-- (void)observeAuthrizationStatusChange {
-    [_timer invalidate];
-    _timer = nil;
-    if ([PHPhotoLibrary authorizationStatus] == 0) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(observeAuthrizationStatusChange) userInfo:nil repeats:NO];
-    }
-    
-    if ([[LMPhotoManager manager] authorizationStatusAuthorized]) {
-        [self.photoPicker hideSetting];
-        [[LMPhotoManager manager] getCameraRollAlbum:self.allowPickingVideo allowPickingImage:self.allowPickingImage needFetchAssets:NO completion:^(LMAlbumModel *model) {
-            self.photoPicker.model = model;;
-        }];
-    }
-}
-
-- (UIAlertController *)showAlertWithTitle:(NSString *)title {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:[NSBundle localizedStringForKey:@"OK"] style:UIAlertActionStyleDefault handler:nil]];
-    [[self photoPicker] presentViewController:alertController animated:YES completion:nil];
-    return alertController;
-}
-
-- (void)hideAlertView:(UIAlertController *)alertView {
-    [alertView dismissViewControllerAnimated:YES completion:nil];
-    alertView = nil;
-}
-
-- (void)showProgressHUD {
-    if (!_progressHUD) {
-        
-        CGFloat progressHUDY = 64;
-        
-        _progressHUD = [UIButton buttonWithType:UIButtonTypeCustom];
-        _progressHUD.frame = CGRectMake(0, progressHUDY, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - progressHUDY);
-        [_progressHUD setBackgroundColor:[UIColor clearColor]];
-        
-        _HUDContainer = [[UIView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 120) / 2, (_progressHUD.lm_height - 90 - progressHUDY) / 2, 120, 90)];
-        _HUDContainer.layer.cornerRadius = 8;
-        _HUDContainer.clipsToBounds = YES;
-        _HUDContainer.backgroundColor = [UIColor darkGrayColor];
-        _HUDContainer.alpha = 0.7;
-        
-        _HUDIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        _HUDIndicatorView.frame = CGRectMake(45, 15, 30, 30);
-        
-        _HUDLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,40, 120, 50)];
-        _HUDLabel.textAlignment = NSTextAlignmentCenter;
-        _HUDLabel.text = self.processHintStr;
-        _HUDLabel.font = [UIFont systemFontOfSize:15];
-        _HUDLabel.textColor = [UIColor whiteColor];
-        
-        [_HUDContainer addSubview:_HUDLabel];
-        [_HUDContainer addSubview:_HUDIndicatorView];
-        [_progressHUD addSubview:_HUDContainer];
-    }
-    [_HUDIndicatorView startAnimating];
-    UIWindow *applicationWindow;
-    if ([[[UIApplication sharedApplication] delegate] respondsToSelector:@selector(window)]) {
-        applicationWindow = [[[UIApplication sharedApplication] delegate] window];
-    } else {
-        applicationWindow = [[UIApplication sharedApplication] keyWindow];
-    }
-    [applicationWindow addSubview:_progressHUD];
-    
-    // if over time, dismiss HUD automatic
-    __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.timeout * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf hideProgressHUD];
-    });
-}
-
-- (void)hideProgressHUD {
-    if (_progressHUD) {
-        [_HUDIndicatorView stopAnimating];
-        [_progressHUD removeFromSuperview];
-    }
-}
-
-
-
 
 @end

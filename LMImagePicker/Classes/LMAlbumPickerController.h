@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LMAlbumPickerController : UIViewController
 
 @property (nonatomic, copy) void(^albumPickerSelectedBlock)(LMAlbumModel *model);
-- (void)configTableView;
 
 @end
 

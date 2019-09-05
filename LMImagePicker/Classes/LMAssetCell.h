@@ -19,8 +19,8 @@ typedef enum : NSUInteger {
 
 @class LMAssetModel;
 @interface LMAssetCell : UICollectionViewCell
-@property (weak, nonatomic) UIButton *selectPhotoButton;
-@property (weak, nonatomic) UIButton *cannotSelectLayerButton;
+@property (weak, nonatomic) UIButton  *selectPhotoButton;
+@property (weak, nonatomic) UIButton    *cannotSelectLayerButton;
 @property (nonatomic, strong) LMAssetModel *model;
 @property (assign, nonatomic) NSInteger index;
 @property (nonatomic, copy) void (^didSelectPhotoBlock)(BOOL);
@@ -37,21 +37,16 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) BOOL allowPreview;
 @property (assign, nonatomic) BOOL useCachedImage;
 
-@property (nonatomic, copy) void (^assetCellDidSetModelBlock)(LMAssetCell *cell, UIImageView *imageView, UIImageView *selectImageView, UILabel *indexLabel, UIView *bottomView, UILabel *timeLength, UIImageView *videoImgView);
-@property (nonatomic, copy) void (^assetCellDidLayoutSubviewsBlock)(LMAssetCell *cell, UIImageView *imageView, UIImageView *selectImageView, UILabel *indexLabel, UIView *bottomView, UILabel *timeLength, UIImageView *videoImgView);
 @end
 
 
 @class LMAlbumModel;
 @interface LMAlbumCell : UITableViewCell
-@property (nonatomic, strong) UIColor *textColor;
-@property (nonatomic, strong) LMAlbumModel *model;
-@property (weak, nonatomic) UIButton *selectedCountButton;
+@property (nonatomic, strong) UIColor       *textColor;
+@property (nonatomic, strong) LMAlbumModel  *model;
+@property (weak, nonatomic) UIButton        *selectedCountButton;
 
-@property (nonatomic, copy) void (^albumCellDidSetModelBlock)(LMAlbumCell *cell, UIImageView *posterImageView, UILabel *titleLabel);
-@property (nonatomic, copy) void (^albumCellDidLayoutSubviewsBlock)(LMAlbumCell *cell, UIImageView *posterImageView, UILabel *titleLabel);
 @end
-
 
 @interface LMAssetCameraCell : UICollectionViewCell
 @property (nonatomic, strong) UIImageView *imageView;
