@@ -80,6 +80,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Default is No
 @property (nonatomic, assign) BOOL statusBarHidden;
 
+/// Default is UIStatusBarStyleDefault ,statusBar Style
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+
 /// The photos user have selected
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
 @property (nonatomic, strong) NSMutableArray<LMAssetModel *> *selectedModels;

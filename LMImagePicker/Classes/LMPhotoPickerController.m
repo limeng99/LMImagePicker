@@ -87,6 +87,10 @@ static CGFloat itemMargin = 5;
     return [LMImagePicker sharedImagePicker].statusBarHidden;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [LMImagePicker sharedImagePicker].statusBarStyle;
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
@@ -120,7 +124,7 @@ static CGFloat itemMargin = 5;
     } else {
         [self showProgressHUD];
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [[LMPhotoManager manager] getCameraRollAlbum:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage needFetchAssets:YES completion:^(LMAlbumModel *model) {
+            [[LMPhotoManager manager] getCameraRollAlbum:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage needFetchAssets:NO completion:^(LMAlbumModel *model) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
                     self.model = model;
@@ -143,7 +147,7 @@ static CGFloat itemMargin = 5;
         LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
         [self showProgressHUD];
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [[LMPhotoManager manager] getCameraRollAlbum:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage needFetchAssets:YES completion:^(LMAlbumModel *model) {
+            [[LMPhotoManager manager] getCameraRollAlbum:imagePicker.allowPickingVideo allowPickingImage:imagePicker.allowPickingImage needFetchAssets:NO completion:^(LMAlbumModel *model) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
                     self.model = model;
@@ -213,16 +217,11 @@ static CGFloat itemMargin = 5;
     [_titleBtn setTitle:title forState:UIControlStateNormal];
     [_titleBtn lm_setButtonImagePosition:LMButtonImagePositionRight spacing:6];
     
-    if (model.isCameraRoll) {
-        _models = [NSMutableArray arrayWithArray:model.models];
-        [self checkSelectedModels];
+    [[LMPhotoManager manager] getAssetsFromFetchResult:self.model.result completion:^(NSArray<LMAssetModel *> *models) {
+        self.models = [NSMutableArray arrayWithArray:models];
         [self initSubviews];
-    } else {
-        [[LMPhotoManager manager] getAssetsFromFetchResult:self.model.result completion:^(NSArray<LMAssetModel *> *models) {
-            self.models = [NSMutableArray arrayWithArray:models];
-            [self initSubviews];
-        }];
-    }
+    }];
+    
 }
 
 - (void)checkSelectedModels {
@@ -384,13 +383,14 @@ static CGFloat itemMargin = 5;
     }
     
     _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _doneButton.frame = CGRectMake(self.view.lm_width - _doneButton.lm_width - 12, 0, _doneButton.lm_width, 50);
     _doneButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [_doneButton addTarget:self action:@selector(doneButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [_doneButton setTitle:imagePicker.doneBtnTitleStr forState:UIControlStateNormal];
     [_doneButton setTitle:imagePicker.doneBtnTitleStr forState:UIControlStateDisabled];
     [_doneButton setTitleColor:imagePicker.btnTitleColorNormal forState:UIControlStateNormal];
     [_doneButton setTitleColor:imagePicker.btnTitleColorDisabled forState:UIControlStateDisabled];
+    [_doneButton sizeToFit];
+    _doneButton.frame = CGRectMake(self.view.lm_width - _doneButton.lm_width - 12, 0, _doneButton.lm_width, 50);
     _doneButton.enabled = imagePicker.selectedModels.count;
     
     _numberImageView = [[UIImageView alloc] initWithImage:imagePicker.photoNumberIconImage];
