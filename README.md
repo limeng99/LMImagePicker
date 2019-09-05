@@ -9,5 +9,5 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## 集成方式
 
 ```ruby
-pod 'LMImagePicker'
+pod 'LMImagePicker'~ '0.1.0'
 ```
