@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.requires_arc     = true
   s.ios.deployment_target = "8.0"
   s.source_files     = "LMImagePicker/Classes/*.{h,m}"
-  s.resources        = "LMImagePicker/Resources/LMImagePicker.bundle"
+  s.resources        = "LMImagePicker/Classes/Resources/LMImagePicker.bundle"
   s.frameworks       = "Photos", "CoreServices"
 end
