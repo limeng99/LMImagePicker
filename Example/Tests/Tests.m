@@ -2,8 +2,8 @@
 //  LMImagePickerTests.m
 //  LMImagePickerTests
 //
-//  Created by 1805441570@qq.com on 09/04/2019.
-//  Copyright (c) 2019 1805441570@qq.com. All rights reserved.
+//  Created by LM on 09/04/2019.
+//  Copyright (c) 2019 LM. All rights reserved.
 //
 
 @import XCTest;

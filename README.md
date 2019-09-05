@@ -19,6 +19,15 @@ LMImagePicker使用了相机、相册，请添加下列属性到info.plist文件
 ```
 LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
 imagePicker.pickerDelegate = self;
+
+/* 属性、界面自定义
+imagePicker.maxImagesCount = 2;
+imagePicker.pickerDelegate = self;
+imagePicker.textColor = [UIColor whiteColor];
+imagePicker.themeColor = [UIColor blackColor];
+imagePicker.blurEffectStyle = UIBlurEffectStyleDark
+*/
+
 [self.navigationController pushViewController:imagePicker.photoPicker animated:YES];
 
 #pragma mark - LMImagePickerDelegate

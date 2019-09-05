@@ -7,7 +7,7 @@
 		<key>LMImagePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<false/>
 		</dict>
 		<key>Pods-LMImagePicker_Example.xcscheme</key>
 		<dict>

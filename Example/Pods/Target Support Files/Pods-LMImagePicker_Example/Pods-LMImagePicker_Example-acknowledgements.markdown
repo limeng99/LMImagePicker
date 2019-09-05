@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## LMImagePicker
 
-Copyright (c) 2019 1805441570@qq.com <limm@miaoqian.com>
+Copyright (c) 2019 LM <limm@miaoqian.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
