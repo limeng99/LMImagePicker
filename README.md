@@ -7,7 +7,7 @@
 ## 集成方式
 
 ```ruby
-pod 'LMImagePicker'~>0.1.0
+pod 'LMImagePicker'~>0.1.1
 ```
 
 ## 集成要求
