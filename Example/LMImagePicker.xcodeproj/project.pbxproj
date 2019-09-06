@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AFB1B9C2321EEEB00BA6D33 /* LMPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB1B9B2321EEEB00BA6D33 /* LMPreviewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -37,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		0320EF4A2F1ED89178F18765 /* Pods-LMImagePicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMImagePicker_Example.release.xcconfig"; path = "Target Support Files/Pods-LMImagePicker_Example/Pods-LMImagePicker_Example.release.xcconfig"; sourceTree = "<group>"; };
+		0AFB1B9A2321EEEB00BA6D33 /* LMPreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMPreviewController.h; sourceTree = "<group>"; };
+		0AFB1B9B2321EEEB00BA6D33 /* LMPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LMPreviewController.m; sourceTree = "<group>"; };
 		14023F664F2C69347D0CA40C /* LMImagePicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LMImagePicker.podspec; path = ../LMImagePicker.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		28E14E1C79452529E08C9246 /* libPods-LMImagePicker_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LMImagePicker_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5395849D51BA7614FE128B1B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -128,9 +131,11 @@
 			children = (
 				6003F59C195388D20070C39A /* LMAppDelegate.h */,
 				6003F59D195388D20070C39A /* LMAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* LMViewController.h */,
 				6003F5A6195388D20070C39A /* LMViewController.m */,
+				0AFB1B9A2321EEEB00BA6D33 /* LMPreviewController.h */,
+				0AFB1B9B2321EEEB00BA6D33 /* LMPreviewController.m */,
+				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -236,7 +241,7 @@
 			attributes = {
 				CLASSPREFIX = LM;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "1805441570@qq.com";
+				ORGANIZATIONNAME = LM;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = 4X9P6P424W;
@@ -339,6 +344,7 @@
 				6003F59E195388D20070C39A /* LMAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* LMViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				0AFB1B9C2321EEEB00BA6D33 /* LMPreviewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +476,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LMImagePicker/LMImagePicker-Prefix.pch";
 				INFOPLIST_FILE = "LMImagePicker/LMImagePicker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -487,6 +494,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LMImagePicker/LMImagePicker-Prefix.pch";
 				INFOPLIST_FILE = "LMImagePicker/LMImagePicker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

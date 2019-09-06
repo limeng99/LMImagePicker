@@ -8,6 +8,7 @@
 
 #import "LMViewController.h"
 #import "LMImagePicker.h"
+#import "LMPreviewController.h"
 
 @interface LMViewController ()<LMImagePickerDelegate>
 
@@ -31,19 +32,23 @@
 - (void)albumBtnAction {
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
     imagePicker.pickerDelegate = self;
-    /*
-     imagePicker.maxImagesCount = 2;
-     imagePicker.pickerDelegate = self;
-     imagePicker.textColor = [UIColor whiteColor];
-     imagePicker.themeColor = [UIColor blackColor];
-     imagePicker.blurEffectStyle = UIBlurEffectStyleDark
-     */
+    
+//     imagePicker.maxImagesCount = 2;
+//     imagePicker.pickerDelegate = self;
+//     imagePicker.textColor = [UIColor whiteColor];
+//     imagePicker.themeColor = [UIColor blackColor];
+//     imagePicker.statusBarStyle = UIStatusBarStyleLightContent;
+//     imagePicker.blurEffectStyle = UIBlurEffectStyleDark;
+    
     [self.navigationController pushViewController:imagePicker.photoPicker animated:YES];
 }
 
 #pragma mark - LMImagePickerDelegate
 - (void)imagePicker:(LMImagePicker *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
     NSLog(@"---- %@", photos);
+    LMPreviewController *previewVC = [[LMPreviewController alloc] init];
+    previewVC.photos = photos;
+    [self.navigationController pushViewController:previewVC animated:YES];
 }
 
 
