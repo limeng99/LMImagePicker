@@ -219,6 +219,7 @@ static CGFloat itemMargin = 5;
     
     [[LMPhotoManager manager] getAssetsFromFetchResult:self.model.result completion:^(NSArray<LMAssetModel *> *models) {
         self.models = [NSMutableArray arrayWithArray:models];
+        [self checkSelectedModels];
         [self initSubviews];
     }];
     
@@ -494,8 +495,7 @@ static CGFloat itemMargin = 5;
 #pragma mark - Action
 - (void)backBtnClick:(UIButton *)backBtn {
     [self.navigationController popViewControllerAnimated:YES];
-    LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
-    imagePicker.photoPicker = nil;
+    [[LMImagePicker sharedImagePicker] cleanCache];
 }
 
 - (void)settingBtnClick {

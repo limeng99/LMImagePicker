@@ -32,8 +32,8 @@
 - (void)albumBtnAction {
     LMImagePicker *imagePicker = [LMImagePicker sharedImagePicker];
     imagePicker.pickerDelegate = self;
-    
-//     imagePicker.maxImagesCount = 2;
+
+    imagePicker.maxImagesCount = 2;
 //     imagePicker.pickerDelegate = self;
 //     imagePicker.textColor = [UIColor whiteColor];
 //     imagePicker.themeColor = [UIColor blackColor];

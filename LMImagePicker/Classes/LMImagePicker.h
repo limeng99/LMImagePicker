@@ -137,6 +137,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *btnTitleColorNormal;
 @property (nonatomic, strong) UIColor *btnTitleColorDisabled;
 
+// Clean cache
+- (void)cleanCache;
+
 @end
 
 

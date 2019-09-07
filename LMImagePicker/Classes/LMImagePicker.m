@@ -177,4 +177,11 @@ LMImagePicker *_imagePicker = nil;
     [_selectedAssetIds removeObject:model.asset.localIdentifier];
 }
 
+- (void)cleanCache {
+    [self.selectedModels removeAllObjects];
+    [self.selectedAssets removeAllObjects];
+    [self.selectedAssetIds removeAllObjects];
+    self.photoPicker = nil;
+}
+
 @end
