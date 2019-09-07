@@ -2,6 +2,7 @@
 
 ## 项目介绍
 一个支持单选、多选、选原图及视频的图片选择器，支持iOS8+.
+
 ![image](https://github.com/limeng99/LMImagePicker/blob/master/Example/LMImagePicker.gif)
 
 
