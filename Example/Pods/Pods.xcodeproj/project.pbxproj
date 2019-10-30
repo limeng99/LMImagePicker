@@ -46,19 +46,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		059BF5D925DA34F15CACDB63C6DD400B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		059BF5D925DA34F15CACDB63C6DD400B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		09FA8E2FE93549E2AF72DE13030B0EB1 /* UIImage+LMImagePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+LMImagePicker.m"; path = "LMImagePicker/Classes/UIImage+LMImagePicker.m"; sourceTree = "<group>"; };
 		144DEAD1A4286D593CCCC45722751F90 /* LMImagePicker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LMImagePicker-prefix.pch"; sourceTree = "<group>"; };
 		1C634A2139E8B0BD1800F5BCA9B707EF /* LMCommonTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMCommonTools.h; path = LMImagePicker/Classes/LMCommonTools.h; sourceTree = "<group>"; };
 		1C78DACAF9884633A81D4941A68B8DD9 /* LMAssetCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMAssetCell.h; path = LMImagePicker/Classes/LMAssetCell.h; sourceTree = "<group>"; };
 		260D9F34ABAB785D6D60DF250635C85A /* Pods-LMImagePicker_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LMImagePicker_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		3846CA5B2636692E740C17DEDD019208 /* libLMImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libLMImagePicker.a; path = libLMImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3846CA5B2636692E740C17DEDD019208 /* libLMImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLMImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		39BB12070CEB2FAF5A072E109252C1BD /* Pods-LMImagePicker_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LMImagePicker_Example-resources.sh"; sourceTree = "<group>"; };
 		3CD71C8373BEB2B32B5472974FFE1E8C /* UIButton+LMImagePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+LMImagePicker.m"; path = "LMImagePicker/Classes/UIButton+LMImagePicker.m"; sourceTree = "<group>"; };
 		3F0EA93A67735F4C66DC3A745545C6FD /* Pods-LMImagePicker_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LMImagePicker_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		48BBF341983F7DF5306ACF456D59832E /* LMImagePicker.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LMImagePicker.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		4B717B1B4EDB2FF6669F47DFA2A2041A /* libPods-LMImagePicker_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-LMImagePicker_Example.a"; path = "libPods-LMImagePicker_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E5F32E97149F96EFD27F7D2F0690F16 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		48BBF341983F7DF5306ACF456D59832E /* LMImagePicker.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = LMImagePicker.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4B717B1B4EDB2FF6669F47DFA2A2041A /* libPods-LMImagePicker_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LMImagePicker_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E5F32E97149F96EFD27F7D2F0690F16 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		52538186CD2322DD09AA976D1657D64D /* LMPhotoManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMPhotoManager.h; path = LMImagePicker/Classes/LMPhotoManager.h; sourceTree = "<group>"; };
 		561E44E645EEAFAAA424E0CAFBA98709 /* LMAssetCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMAssetCell.m; path = LMImagePicker/Classes/LMAssetCell.m; sourceTree = "<group>"; };
 		58569168A7958ADE249EC24F017A921B /* LMImagePicker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LMImagePicker-dummy.m"; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		966DA662E028EF72660DBAC79FBAB3EF /* LMPhotoPickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMPhotoPickerController.h; path = LMImagePicker/Classes/LMPhotoPickerController.h; sourceTree = "<group>"; };
 		97A6863A8E17C4B8C55FE987E8D29383 /* LMProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LMProgressView.h; path = LMImagePicker/Classes/LMProgressView.h; sourceTree = "<group>"; };
 		9CD6731EDFA364470E325391524F2B21 /* NSBundle+LMImagePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+LMImagePicker.h"; path = "LMImagePicker/Classes/NSBundle+LMImagePicker.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A4CE1437B28767A2F3CD6E578CFA7B0D /* LMCommonTools.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMCommonTools.m; path = LMImagePicker/Classes/LMCommonTools.m; sourceTree = "<group>"; };
 		A714882509BF47561E439B886F15DF5D /* UIImage+LMImagePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+LMImagePicker.h"; path = "LMImagePicker/Classes/UIImage+LMImagePicker.h"; sourceTree = "<group>"; };
 		B5DC0311EE15EB79B278760F6231EA36 /* LMPhotoPickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LMPhotoPickerController.m; path = LMImagePicker/Classes/LMPhotoPickerController.m; sourceTree = "<group>"; };
@@ -188,6 +188,10 @@
 		D7E3D01D29DEE5BAA96A06275D281A51 /* LMImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				E5B0664889ACECF16678C954FA537E9D /* LMImagePicker.h */,
+				59BFDE3262EA125128FADAF4112BA787 /* LMImagePicker.m */,
+				966DA662E028EF72660DBAC79FBAB3EF /* LMPhotoPickerController.h */,
+				B5DC0311EE15EB79B278760F6231EA36 /* LMPhotoPickerController.m */,
 				8A46855CED54E91AEC642065835A98A2 /* LMAlbumPickerController.h */,
 				B92636DA33C1A9C50EB48CA6E2ACCA65 /* LMAlbumPickerController.m */,
 				1C78DACAF9884633A81D4941A68B8DD9 /* LMAssetCell.h */,
@@ -196,12 +200,8 @@
 				7336CFCA0D45959009577E7ABC2DB2E6 /* LMAssetModel.m */,
 				1C634A2139E8B0BD1800F5BCA9B707EF /* LMCommonTools.h */,
 				A4CE1437B28767A2F3CD6E578CFA7B0D /* LMCommonTools.m */,
-				E5B0664889ACECF16678C954FA537E9D /* LMImagePicker.h */,
-				59BFDE3262EA125128FADAF4112BA787 /* LMImagePicker.m */,
 				52538186CD2322DD09AA976D1657D64D /* LMPhotoManager.h */,
 				BE4BBD6F7914D973361E9CCDDC8095FF /* LMPhotoManager.m */,
-				966DA662E028EF72660DBAC79FBAB3EF /* LMPhotoPickerController.h */,
-				B5DC0311EE15EB79B278760F6231EA36 /* LMPhotoPickerController.m */,
 				97A6863A8E17C4B8C55FE987E8D29383 /* LMProgressView.h */,
 				7FB93BEA65FFDA372158D51622961743 /* LMProgressView.m */,
 				9CD6731EDFA364470E325391524F2B21 /* NSBundle+LMImagePicker.h */,
@@ -464,8 +464,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

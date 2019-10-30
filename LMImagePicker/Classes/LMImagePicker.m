@@ -85,14 +85,14 @@ LMImagePicker *_imagePicker = nil;
 }
 
 - (void)configDefaultImageName {
-    self.navBackImage = [UIImage imageNamedFromMyBundle:@"nav_back"];
-    self.photoAlbumArrowImage = [UIImage imageNamedFromMyBundle:@"album_arrow"];
-    self.takePictureImage = [UIImage imageNamedFromMyBundle:@"takePicture"];
-    self.photoSelImage = [UIImage imageNamedFromMyBundle:@"photo_select_sel"];
-    self.photoNorImage = [UIImage imageNamedFromMyBundle:@"photo_select_nor"];
-    self.photoNumberIconImage = [UIImage createImageWithColor:nil size:CGSizeMake(24, 24) radius:12];
-    self.photoOriginSelImage = [UIImage imageNamedFromMyBundle:@"photo_original_sel"];
-    self.photoOriginNorImage = [UIImage imageNamedFromMyBundle:@"photo_original_nor"];
+    self.navBackImage = [UIImage lm_imageNamedFromMyBundle:@"nav_back"];
+    self.photoAlbumArrowImage = [UIImage lm_imageNamedFromMyBundle:@"album_arrow"];
+    self.takePictureImage = [UIImage lm_imageNamedFromMyBundle:@"takePicture"];
+    self.photoSelImage = [UIImage lm_imageNamedFromMyBundle:@"photo_select_sel"];
+    self.photoNorImage = [UIImage lm_imageNamedFromMyBundle:@"photo_select_nor"];
+    self.photoNumberIconImage = [UIImage lm_createImageWithColor:nil size:CGSizeMake(24, 24) radius:12];
+    self.photoOriginSelImage = [UIImage lm_imageNamedFromMyBundle:@"photo_original_sel"];
+    self.photoOriginNorImage = [UIImage lm_imageNamedFromMyBundle:@"photo_original_nor"];
 }
 
 - (LMPhotoPickerController *)photoPicker {
@@ -119,8 +119,8 @@ LMImagePicker *_imagePicker = nil;
 
 - (void)setTextColor:(UIColor *)textColor {
     _textColor = textColor;
-    self.navBackImage = [[UIImage imageNamedFromMyBundle:@"nav_back"] imageWithTintColor:self.textColor];
-    self.photoAlbumArrowImage = [[UIImage imageNamedFromMyBundle:@"album_arrow"] imageWithTintColor:self.textColor];
+    self.navBackImage = [[UIImage lm_imageNamedFromMyBundle:@"nav_back"] lm_imageWithTintColor:self.textColor];
+    self.photoAlbumArrowImage = [[UIImage lm_imageNamedFromMyBundle:@"album_arrow"] lm_imageWithTintColor:self.textColor];
 }
 
 - (void)setColumnNumber:(NSInteger)columnNumber {

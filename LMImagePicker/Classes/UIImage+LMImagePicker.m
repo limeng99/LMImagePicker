@@ -12,7 +12,7 @@
 
 @implementation UIImage (LMImagePicker)
 
-+ (UIImage *)imageNamedFromMyBundle:(NSString *)name {
++ (UIImage *)lm_imageNamedFromMyBundle:(NSString *)name {
     NSBundle *imageBundle = [NSBundle imagePickerBundle];
     name = [name stringByAppendingString:@"@2x"];
     NSString *imagePath = [imageBundle pathForResource:name ofType:@"png"];
@@ -24,7 +24,7 @@
     return image;
 }
 
-+ (UIImage *)createImageWithColor:(UIColor *)color size:(CGSize)size radius:(CGFloat)radius {
++ (UIImage *)lm_createImageWithColor:(UIColor *)color size:(CGSize)size radius:(CGFloat)radius {
     if (!color) {
         color = [LMImagePicker sharedImagePicker].iconThemeColor;
     }
@@ -40,7 +40,7 @@
     return image;
 }
 
-- (UIImage *)imageWithTintColor:(UIColor *)color {
+- (UIImage *)lm_imageWithTintColor:(UIColor *)color {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
     CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
     [color set];

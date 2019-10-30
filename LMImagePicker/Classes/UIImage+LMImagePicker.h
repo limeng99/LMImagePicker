@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (LMImagePicker)
 
-+ (UIImage *)imageNamedFromMyBundle:(NSString *)name;
-+ (UIImage *)createImageWithColor:(nullable UIColor *)color size:(CGSize)size radius:(CGFloat)radius;
-- (UIImage *)imageWithTintColor:(UIColor *)color;
++ (UIImage *)lm_imageNamedFromMyBundle:(NSString *)name;
++ (UIImage *)lm_createImageWithColor:(nullable UIColor *)color size:(CGSize)size radius:(CGFloat)radius;
+- (UIImage *)lm_imageWithTintColor:(UIColor *)color;
 
 @end
 
